@@ -102,7 +102,7 @@ make -C nls
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/skel/C,%{_mandir}/man1,%{_bindir}} \
+install -d $RPM_BUILD_ROOT/{etc/skel,%{_mandir}/man1,%{_bindir}} \
 	$RPM_BUILD_ROOT%{_datadir}/locale/{fr,it,ja,gr,es}
 
 install tcsh tcsh.static $RPM_BUILD_ROOT%{_bindir}
