@@ -26,14 +26,11 @@ foreach i ( /etc/env.d/* )
 		# nothing
 		breaksw
 	  default:
-		if ( -r $i ) then
-			set body = `cat $i | grep -v "^#"`
-			if ($status == 0) then
-				foreach j ( $body )
-					eval set $j
-					setenv $NAME
-				end
-			endif
+		test `cat $i | grep -v "^#" |head -n 1`
+		if ($status == 0) then
+		set j = `cat $i | grep -v "^#" |head -n 1`
+			eval set $j
+			setenv $NAME
 		endif
 		breaksw
 	endsw
