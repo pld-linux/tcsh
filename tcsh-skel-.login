@@ -1,4 +1,4 @@
-set prompt = %m:%~%#
+set prompt = '%n@%m:%~%# '
 set notify
 set history = 100
 set savehist = 80
