@@ -114,7 +114,7 @@ ln -sf tcsh $RPM_BUILD_ROOT%{_bindir}/csh
 nroff -me eight-bit.me > eight-bit.txt
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/skel/C/.login
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/skel/.login
 
 install tcsh.french.cat $RPM_BUILD_ROOT%{_datadir}/locale/fr/tcsh
 install tcsh.italian.cat $RPM_BUILD_ROOT%{_datadir}/locale/it/tcsh
@@ -158,7 +158,7 @@ fi
 %doc {NewThings,FAQ,eight-bit.txt,complete.tcsh}.gz
 
 %{_sysconfdir}/csh.*
-/etc/skel/C/.login
+/etc/skel/.login
 
 %attr(755,root,root) %{_bindir}/csh
 %attr(755,root,root) %{_bindir}/tcsh
