@@ -4,27 +4,25 @@ Summary(fr):	Shell C amélioré
 Summary(pl):	Zaawansowany C-shell
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
-%define		ver	6.09
+%define		ver	6.10
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	9
-Copyright:	distributable
+Release:	5
+License:	Distributable
 Group:		Shells
 Group(pl):	Pow³oki
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{ver}.tar.gz
 Source1:	csh.cshrc
 Source2:	%{name}-skel-.login
 Patch0:		%{name}-utmp.patch
-Patch1:		%{name}-security.patch
-Patch2:		%{name}-misc.patch
-Patch3:		%{name}-fhs.patch
-Patch4:		%{name}-pathmax.patch
-Patch5:		%{name}-strcoll.patch
-Patch6:		%{name}-termios.patch
-Patch7:		%{name}-no-timestamp-history.patch
-Patch8:		%{name}-no_stat_utmp.patch
-Patch9:		%{name}-locale.patch
-Patch10:	%{name}-time.patch
+Patch1:		%{name}-misc.patch
+Patch2:		%{name}-fhs.patch
+Patch3:		%{name}-termios.patch
+Patch4:		%{name}-no-timestamp-history.patch
+Patch5:		%{name}-no_stat_utmp.patch
+Patch6:		%{name}-locale.patch
+Patch7:		%{name}-time.patch
+Patch8:		%{name}-login.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
@@ -89,8 +87,6 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch6	-p1
 %patch7	-p1
 %patch8	-p1
-%patch9	-p1
-%patch10 -p1
 
 %build
 autoconf
