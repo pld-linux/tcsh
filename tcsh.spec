@@ -120,7 +120,9 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch6	-p1
 %patch7	-p1
 %patch8	-p1
-%patch9 -p1
+## don't uncomment unless you fix it - it breaks non-ascii chars in 1-byte
+## encodings!
+##%patch9 -p1
 %patch10 -p1
 
 %build
