@@ -4,8 +4,8 @@ Summary(fr):	Shell C amélioré
 Summary(pl):	Zaawansowany C-shell
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
-Version:	6.10.01
-Release:	7
+Version:	6.10.02
+Release:	1
 License:	Distributable
 Group:		Shells
 Group(pl):	Pow³oki
