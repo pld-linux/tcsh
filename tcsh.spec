@@ -7,7 +7,7 @@ Name:		tcsh
 %define		ver	6.10
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	5
+Release:	6
 License:	Distributable
 Group:		Shells
 Group(pl):	Pow³oki
@@ -23,6 +23,8 @@ Patch5:		%{name}-no_stat_utmp.patch
 Patch6:		%{name}-locale.patch
 Patch7:		%{name}-time.patch
 Patch8:		%{name}-login.patch
+Patch9:		%{name}-rlimit_locks.patch
+Patch10:	%{name}-dspmbyte.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
@@ -87,14 +89,16 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch6	-p1
 %patch7	-p1
 %patch8	-p1
+%patch9	-p1
+%patch10	-p1
 
 %build
 autoconf
 %configure
 
-%{__make} LDFLAGS="-static %{!?debug:-s}" LIBES="-ltinfo -lcrypt"
+%{__make} LDFLAGS="-static %{rpmldflags}" LIBES="-ltinfo -lcrypt"
 mv tcsh tcsh.static
-%{__make} LDFLAGS="%{!?debug:-s}" LIBES="-ltinfo -lcrypt"
+%{__make} LDFLAGS="%{rpmldflags}" LIBES="-ltinfo -lcrypt"
 
 make -C nls
 
