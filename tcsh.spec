@@ -12,7 +12,7 @@ Summary(pl):	Zaawansowany C-shell
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
 Version:	6.10.02
-Release:	2
+Release:	3
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.fujitsu.co.jp/pub/misc/shells/tcsh/%{name}-%{version}.tgz
@@ -88,7 +88,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch1 -p1
 %patch2 -p1
 %patch3	-p1
-%{!?_with_working_history: %patch4	-p1}
+%{!?_with_working_history: %{__patch} -p1 -s < %{PATCH4} }
 %patch5	-p1
 %patch6	-p1
 %patch7	-p1
