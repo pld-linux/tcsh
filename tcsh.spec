@@ -7,21 +7,22 @@ Name:		tcsh
 %define		ver	6.09
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	6
+Release:	7
 Copyright:	distributable
 Group:		Shells
 Group(pl):	Pow³oki
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{ver}.tar.gz
 Source1:	csh.cshrc
-Source2:	tcsh-skel-.login
-Patch0:		tcsh-utmp.patch
-Patch1:		tcsh-security.patch
-Patch2:		tcsh-misc.patch
-Patch3:		tcsh-fhs.patch
-Patch4:		tcsh-pathmax.patch
-Patch5:		tcsh-strcoll.patch
-Patch6:		tcsh-termios.patch
-Patch7:		tcsh-no-timestamp-history.patch
+Source2:	%{name}-skel-.login
+Patch0:		%{name}-utmp.patch
+Patch1:		%{name}-security.patch
+Patch2:		%{name}-misc.patch
+Patch3:		%{name}-fhs.patch
+Patch4:		%{name}-pathmax.patch
+Patch5:		%{name}-strcoll.patch
+Patch6:		%{name}-termios.patch
+Patch7:		%{name}-no-timestamp-history.patch
+Patch8:		%{name}-no_stat_utmp.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
@@ -33,26 +34,27 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_bindir		/bin
 
 %description
-'tcsh' is an enhanced version of csh (the C shell), with additional features
-such as command history, filename completion, and fancier prompts.
+'tcsh' is an enhanced version of csh (the C shell), with additional
+features such as command history, filename completion, and fancier
+prompts.
 
 %description -l de
-'tcsh' ist eine erweiterte Version von csh (der C-Shell) mit zusätzlichen
-Funktionen wie Befehlsgeschichte, Dateinamenvervollständigung und
-attraktiveren Prompts.
+'tcsh' ist eine erweiterte Version von csh (der C-Shell) mit
+zusätzlichen Funktionen wie Befehlsgeschichte,
+Dateinamenvervollständigung und attraktiveren Prompts.
 
 %description -l fr
 'tcsh' est une version améliorée de csh (le shell C), avec des
-fonctionnalités supplémentaires comme un historique des commandes,
-la complétion des noms de fichiers, et des prompts sympas.
+fonctionnalités supplémentaires comme un historique des commandes, la
+complétion des noms de fichiers, et des prompts sympas.
 
 %description -l pl
-Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi 
+Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi
 udogodnieniami takimi jak historia komend itp.
 
 %description -l tr
-tcsh, csh'in (C kabuðu) geliþkin bir sürümüdür ve komut tarihçesi, dosya adý
-tamamlama ve þýk komut imleri gibi özellikler sunar.
+tcsh, csh'in (C kabuðu) geliþkin bir sürümüdür ve komut tarihçesi,
+dosya adý tamamlama ve þýk komut imleri gibi özellikler sunar.
 
 %package static
 Summary:	Staticaly linked Enhanced c-shell
@@ -62,8 +64,9 @@ Group(pl):	Pow³oki
 Requires:	%{name}
 
 %description static
-'tcsh' is an enhanced version of csh (the C shell), with additional features
-such as command history, filename completion, and fancier prompts.
+'tcsh' is an enhanced version of csh (the C shell), with additional
+features such as command history, filename completion, and fancier
+prompts.
 
 This packege contains staticly linked version of tcsh.
 
@@ -83,6 +86,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch5	-p1
 %patch6	-p1
 %patch7	-p1
+%patch8	-p1
 
 %build
 autoconf
@@ -104,10 +108,10 @@ echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
 ln -sf tcsh $RPM_BUILD_ROOT%{_bindir}/csh
 nroff -me eight-bit.me > eight-bit.txt
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/skel/C/.login
 
-gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man1/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	NewThings FAQ eight-bit.txt complete.tcsh
 
 %post
@@ -129,20 +133,20 @@ fi
 %postun
 if [ ! -x %{_bindir}/tcsh ]; then
 	grep -v '^%{_bindir}/tcsh$' /etc/shells | grep -v '^%{_bindir}/csh$'> /etc/shells.rpm
-	mv /etc/shells.rpm /etc/shells
+	mv -f /etc/shells.rpm /etc/shells
 fi
 
 %postun static
 if [ ! -x %{_bindir}/tcsh.static ]; then
 	grep -v '^%{_bindir}/tcsh.static$' /etc/shells > /etc/shells.rpm
-	mv /etc/shells.rpm /etc/shells
+	mv -f /etc/shells.rpm /etc/shells
 fi
 
 %files
 %defattr(644,root,root,755)
 %doc {NewThings,FAQ,eight-bit.txt,complete.tcsh}.gz
 
-/etc/csh.*
+%{_sysconfdir}/csh.*
 /etc/skel/C/.login
 
 %attr(755,root,root) %{_bindir}/csh
