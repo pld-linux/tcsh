@@ -1,12 +1,3 @@
---- tcsh-6.08.01.orig/nls/C/set14
-+++ tcsh-6.08.01/nls/C/set14
-@@ -2,5 +2,5 @@
- $ sh.file.c
- $set 14 
- 1 \nYikes!! Too many %s!!\n
--3 names in password file
-+2 names in password file
- 3 files
 --- tcsh-6.08.01.orig/nls/Makefile
 +++ tcsh-6.08.01/nls/Makefile
 @@ -1,7 +1,7 @@
@@ -18,15 +9,6 @@
  
  catalogs:
  	@for i in ${SUBDIRS} ; \
---- tcsh-6.08.01.orig/nls/greek/set14
-+++ tcsh-6.08.01/nls/greek/set14
-@@ -2,5 +2,5 @@
- $ sh.file.c
- $set 14 
- 1 \nΠφφφ!! Υπερβολικά πολλά %s!!\n
--3 ονόματα στο password file
-+2 ονόματα στο password file
- 3 αρχεία
 --- tcsh-6.08.01.orig/Makefile.in
 +++ tcsh-6.08.01/Makefile.in
 @@ -136,7 +136,8 @@
