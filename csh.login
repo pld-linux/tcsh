@@ -30,7 +30,7 @@ foreach i ( /etc/env.d/* )
 		if ($status == 0) then
 		set j = `cat $i | grep -v "^#" |head -n 1`
 			eval set $j
-			setenv $NAME
+			setenv $NAME "$$NAME"
 		endif
 		breaksw
 	endsw
