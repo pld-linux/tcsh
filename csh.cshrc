@@ -37,11 +37,11 @@ if ($status == 0) then
 			breaksw
 		  default:
 		  	if ( -r $i ) then
-				set wsio = `cat $i`
+				set wsio = `cat $i | grep -v "^#"`
 				foreach j ( $wsio )
 					eval set $j
+					setenv $NAME
 				end
-				setenv $NAME
 			endif
 			breaksw
 		endsw
