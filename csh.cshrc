@@ -1,6 +1,6 @@
 # /etc/cshrc
 
-# System wide rc file for interactive shell
+# System wide rc file for (t)csh
 
 if ($?prompt) then
   [ "$SHELL" = /bin/tcsh ]
