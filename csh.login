@@ -23,18 +23,19 @@ if ($status == 0) then
 		switch ( $NAME )
 		  case *~:
 		  case *.bak:
-		  case *.rpmmnew:
-		  	# nothing
+		  case *.rpmnew:
+		  case *.rpmsave:
+			# nothing
 			breaksw
 		  default:
-		  	if ( -r $i ) then
+			if ( -r $i ) then
 				set body = `cat $i | grep -v "^#"`
 				if $status then
 					foreach j ( $body )
 						eval set $j
 						setenv $NAME
 					end
-				endif	
+				endif
 			endif
 			breaksw
 		endsw
@@ -44,11 +45,11 @@ endif
 test -d /etc/profile.d
 if ($status == 0) then
 	set nonomatch
-        foreach i ( /etc/profile.d/*.csh )
+	foreach i ( /etc/profile.d/*.csh )
 		test -f $i
 		if ($status == 0) then
-               		source $i
+			source $i
 		endif
-        end
+	end
 	unset nonomatch
 endif
