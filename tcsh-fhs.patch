@@ -1,15 +1,15 @@
 diff -Nru tcsh-6.09.00/complete.tcsh tcsh-6.09.00.new/complete.tcsh
 --- tcsh-6.09.00/complete.tcsh	Wed Aug 18 21:52:00 1999
 +++ tcsh-6.09.00.new/complete.tcsh	Wed Aug 18 21:52:21 1999
-@@ -421,7 +421,7 @@
-     # these from Tom Warzeka <waz@quahog.npt.nuwc.navy.mil>
+@@ -625,7 +625,7 @@
+     # these from Tom Warzeka <tom@waz.cc>
      # you may need to set the following variables for your host
-     set _elispdir = /usr/local/share/emacs/20.2/lisp # GNU Emacs lisp directory
+     set _elispdir = /usr/local/share/emacs/20.7/lisp # GNU Emacs lisp directory
 -    set _maildir = /var/spool/mail  # Post Office: /var/spool/mail or /usr/mail
-+    set _maildir = /var/mail  # Post Office: /var/mail
++    set _maildir = /var/mail  # Post Office: /var/spool/mail or /usr/mail
      set _ypdir  = /var/yp	# directory where NIS (YP) maps are kept
-     set _nisdir  = /var/nis	# directory where NIS+  maps are kept
      set _domain = "`domainname`"
+ 
 @@ -448,20 +448,21 @@
  			n@-u@T:$_maildir@ n/-f/f/ n/*/u/
      endif

@@ -1,11 +1,11 @@
---- tcsh-6.09.00/sh.h.orig	Tue Mar 20 12:51:49 2001
-+++ tcsh-6.09.00/sh.h	Tue Mar 20 12:56:36 2001
-@@ -223,6 +223,8 @@
- #endif /* !_MINIX && !_VMS_POSIX && !WINNT */
- #include <sys/stat.h>
+--- tcsh-6.10.00/sh.h	Sun Nov 19 15:50:43 2000
++++ tcsh-6.10.00/sh.h.new	Tue Feb  6 15:11:33 2001
+@@ -208,7 +208,7 @@
+ # include <sys/procstats.h>
+ #endif /* _SEQUENT_ */
+ #if (defined(POSIX) || SYSVREL > 0) && !defined(WINNT_NATIVE)
+-# include <sys/times.h>
++# include <time.h>
+ #endif /* (POSIX || SYSVREL > 0) && !WINNT_NATIVE */
  
-+#include <time.h>
-+
- #if defined(BSDTIMES) || defined(BSDLIMIT)
- # include <sys/time.h>
- # if SYSVREL>3 && !defined(SCO) && !defined(sgi) && !defined(SNI) && !defined(sun) && !(defined(__alpha) && defined(__osf__)) && !defined(_SX)
+ #ifdef NLS
