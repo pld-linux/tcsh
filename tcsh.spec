@@ -71,7 +71,7 @@ Requires:	%{name}
 features such as command history, filename completion, and fancier
 prompts.
 
-This packege contains staticly linked version of tcsh.
+This packege contains statically linked version of tcsh.
 
 %description static -l pl
 Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi
