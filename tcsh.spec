@@ -128,7 +128,7 @@ fi
 %doc {NewThings,FAQ,eight-bit.txt,complete.tcsh}.gz
 
 /etc/csh.*
-/etc/skel/C/*
+/etc/skel/C/.login
 
 %attr(755,root,root) /bin/csh
 %attr(755,root,root) /bin/tcsh
