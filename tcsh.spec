@@ -1,10 +1,9 @@
-
-# Conditional build
 #
+# Conditional build:
 # _with_working_history - compiles tcsh with timestamps in ~/.history file so
 #                         it serves any real purpose (which is not the case
 #                         for default PLD tcsh)
-
+#
 Summary:	Enhanced c-shell
 Summary(de):	Erweiterte C-Shell
 Summary(es):	C-shell mejorada
@@ -26,20 +25,20 @@ Patch0:		%{name}-utmp.patch
 Patch1:		%{name}-misc.patch
 Patch2:		%{name}-fhs.patch
 Patch3:		%{name}-termios.patch
-%{!?_with_working_history:Patch4: %{name}-no-timestamp-history.patch}
+Patch4:		%{name}-no-timestamp-history.patch
 Patch5:		%{name}-no_stat_utmp.patch
 Patch6:		%{name}-locale.patch
 Patch7:		%{name}-time.patch
 Patch9:		%{name}-rlimit_locks.patch
 Patch10:	%{name}-dspmbyte.patch
-Provides:	csh
-Prereq:		fileutils
-Prereq:		grep
 BuildRequires:	autoconf
-BuildRequires:	ncurses-devel >= 5.0
-BuildRequires:	ncurses-static
 BuildRequires:	glibc-static
 BuildRequires:	groff
+BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	ncurses-static
+Requires(post,preun):	grep
+Requires(preun):	fileutils
+Provides:	csh
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_bindir		/bin
@@ -90,7 +89,9 @@ dosya adý tamamlama ve þýk komut imleri gibi özellikler sunar.
 Summary:	Statically linked Enhanced c-shell
 Summary(pl):	Statycznie zlinkowany zaawansowany C-shell
 Group:		Applications/Shells
-Requires:	%{name}
+Requires(post,preun):	grep
+Requires(preun):	fileutils
+Requires:	%{name} = %{version}
 
 %description static
 'tcsh' is an enhanced version of csh (the C shell), with additional
@@ -154,6 +155,7 @@ install tcsh.spanish.cat $RPM_BUILD_ROOT%{_datadir}/locale/es/tcsh
 rm -rf $RPM_BUILD_ROOT
 
 %post
+umask 022
 if [ ! -f /etc/shells ]; then
 	echo "%{_bindir}/tcsh" > /etc/shells
 	echo "%{_bindir}/csh" >> /etc/shells
@@ -163,6 +165,7 @@ else
 fi
 
 %post static
+umask 022
 if [ ! -f /etc/shells ]; then
 	echo "%{_bindir}/tcsh.static" > /etc/shells
 else
@@ -170,12 +173,14 @@ else
 fi
 
 %preun
+umask 022
 if [ "$1" = "0" ]; then
 	grep -v '^%{_bindir}/t\?csh$' /etc/shells > /etc/shells.new
 	mv -f /etc/shells.new /etc/shells
 fi
 
 %preun static
+umask 022
 if [ "$1" = "0" ]; then
 	grep -v '^%{_bindir}/tcsh\.static$' /etc/shells > /etc/shells.new
 	mv -f /etc/shells.new /etc/shells
