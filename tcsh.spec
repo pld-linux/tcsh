@@ -7,7 +7,7 @@ Name:		tcsh
 %define		ver	6.09
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	2
+Release:	3
 Copyright:	distributable
 Group:		Shells
 Group(pl):	Pow³oki
@@ -22,7 +22,7 @@ Patch4:		tcsh-pathmax.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
-BuildRequires:	ncurses-devel
+BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	ncurses-static
 BuildRequires:	glibc-static
 Buildroot:	/tmp/%{name}-%{version}-root
