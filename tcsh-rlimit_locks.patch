@@ -1,8 +1,8 @@
---- tcsh-6.10.00.old/sh.func.c	Mon Apr 16 18:56:25 2001
-+++ tcsh-6.10.00/sh.func.c	Tue Apr 17 14:42:45 2001
-@@ -1823,6 +1823,10 @@
-     { RLIMIT_OFILE,	"openfiles",	1,	""		},
- # endif /* RLIMIT_OFILE */
+--- tcsh-6.13.00/sh.func.c.orig	2004-09-05 12:52:39.640514472 +0200
++++ tcsh-6.13.00/sh.func.c	2004-09-05 13:05:05.446134784 +0200
+@@ -1873,6 +1873,10 @@
+     { RLIMIT_SBSIZE,	"sbsize",	1,	""		},
+ # endif /* RLIMIT_SBSIZE */
  
 +# ifdef RLIMIT_LOCKS
 +    { RLIMIT_LOCKS,	"flocks",	1,	""		},
@@ -11,21 +11,15 @@
      { -1, 		NULL, 		0, 	NULL		}
  };
  
-@@ -2032,8 +2036,12 @@
+@@ -2082,6 +2086,7 @@
  # endif /* BSDLIMIT */
      RLIM_TYPE limit;
      int     div = lp->limdiv;
-+    int	limret;
++    int     limret;
  
--    xprintf("%s \t", lp->limname);
-+    if ( lp->limconst != RLIMIT_LOCKS )
-+	    xprintf("%s \t", lp->limname);
-+    else
-+	    xprintf("%s \t\t", lp->limname);
+     xprintf("%-13.13s", lp->limname);
  
- # ifndef BSDLIMIT
-     limit = ulimit(lp->limconst, 0);
-@@ -2042,7 +2050,12 @@
+@@ -2092,7 +2097,12 @@
  	limit -= 0x20000000;
  #  endif /* aiws */
  # else /* BSDLIMIT */
@@ -39,8 +33,8 @@
      limit = hard ? rlim.rlim_max : rlim.rlim_cur;
  # endif /* BSDLIMIT */
  
-@@ -2138,6 +2151,11 @@
- 	rlim.rlim_cur = limit;
+@@ -2191,6 +2201,11 @@
+ 	rlim.rlim_max = rlim.rlim_cur;
  
      if (setrlimit(lp->limconst, &rlim) < 0) {
 +       if ( ( lp->limconst == RLIMIT_LOCKS ) &&
