@@ -7,7 +7,7 @@ Name:		tcsh
 %define		ver	6.09
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	4
+Release:	5
 Copyright:	distributable
 Group:		Shells
 Group(pl):	Pow³oki
@@ -21,6 +21,7 @@ Patch3:		tcsh-fhs.patch
 Patch4:		tcsh-pathmax.patch
 Patch5:		tcsh-strcoll.patch
 Patch6:		tcsh-termios.patch
+Patch7:		tcsh-no-timestamp-history.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
@@ -81,6 +82,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch4	-p1
 %patch5	-p1
 %patch6	-p1
+%patch7	-p1
 
 %build
 autoconf
