@@ -88,9 +88,9 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 autoconf
 %configure
 
-make LDFLAGS="-static -s" LIBES="-ltinfo -lcrypt -lnsl"
+%{__make} LDFLAGS="-static -s" LIBES="-ltinfo -lcrypt -lnsl"
 mv tcsh tcsh.static
-make LDFLAGS="-s" LIBES="-ltinfo -lcrypt -lnsl"
+%{__make} LDFLAGS="-s" LIBES="-ltinfo -lcrypt -lnsl"
 
 %install
 rm -rf $RPM_BUILD_ROOT
