@@ -85,10 +85,10 @@ if [ ! -x /bin/tcsh ]; then
 fi
 
 %files
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc NewThings FAQ eight-bit.txt complete.tcsh
 /etc/csh.cshrc
-%attr(755, root, root) /bin/*
+%attr(755,root,root) /bin/*
 %{_mandir}/man1/*
 
 %changelog
