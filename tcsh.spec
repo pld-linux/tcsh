@@ -89,7 +89,7 @@ fi
 %doc NewThings FAQ eight-bit.txt complete.tcsh
 /etc/csh.cshrc
 %attr(755, root, root) /bin/*
-%attr(644, root,  man) %{_mandir}/man1/*
+%{_mandir}/man1/*
 
 %changelog
 * Mon Nov 16 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
