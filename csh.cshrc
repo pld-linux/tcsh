@@ -27,14 +27,25 @@ set savehist=1000
 
 test -d /etc/env.d
 if ($status == 0) then
-	set nonomatch
 	foreach i ( /etc/env.d/* )
-		test -f $i
-		if ($status == 0) then
-			set `cat $i`
-		endif
+		set NAME=`basename $i`
+		switch ( $NAME )
+		  case *~:
+		  case *.bak:
+		  case *.rpmmnew:
+		  	# nothing
+			breaksw
+		  default:
+		  	if ( -r $i ) then
+				set wsio = `cat $i`
+				foreach j ( $wsio )
+					eval set $j
+				end
+				setenv $NAME
+			endif
+			breaksw
+		endsw
 	end
-	unset nonomatch
 endif
 
 test -d /etc/profile.d
