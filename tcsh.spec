@@ -141,21 +141,3 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %attr(755,root,root) /bin/tcsh.static
-
-%changelog
-* Sat Jun  5 1999 Jan Rêkorajski <baggins@pld.org.pl>
-  [6.07.09-2]
-- added static subpackage
-
-* Sun Nov 08 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-		  Tomek K³oczko <k³oczek@pld.org.pl>	
-  [6.07.09-1d]
-- updated to 6.07.09,
-- moved /etc/csh.cshrc from setupt package to tcsh,
-- minor changes.
-
-* Tue Jun 30 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [6.07-2d]
-- build for PLD Tornado,
-- translation modified for pl.
-- start at RH spec file
