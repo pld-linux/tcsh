@@ -90,7 +90,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 #%patch10 -p1
 
 %build
-autoconf
+%{__autoconf}
 %configure
 
 %{__make} LDFLAGS="-static %{rpmldflags}" LIBES="-ltinfo -lcrypt"
