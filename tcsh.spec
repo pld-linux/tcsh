@@ -1,8 +1,8 @@
 #
 # Conditional build:
-%bcond_with	working_history	# compiles tcsh with timestamps in
-#               ~/.history file so it serves any real purpose (which
-#               is not the case for default PLD tcsh)
+%bcond_with working_history	# compiles tcsh with timestamps in
+				# ~/.history file so it serves any real purpose (which
+				# is not the case for default PLD tcsh)
 %bcond_without	static		# don't build static version
 #
 Summary:	Enhanced c-shell
@@ -17,7 +17,7 @@ Summary(tr):	GeliЧmiЧ c-kabuПu (c-shell)
 Summary(uk):	Покращена верся csh
 Name:		tcsh
 Version:	6.13.00
-Release:	1
+Release:	2
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
