@@ -71,7 +71,7 @@ fonctionnalités supplémentaires comme un historique des commandes, la
 complétion des noms de fichiers, et des prompts sympas.
 
 %description -l pl
-Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi
+Tcsh jest zaawansowan± wersj± pow³oki csh (C-shell), z ró¿norodnymi
 udogodnieniami takimi jak historia komend itp.
 
 %description -l pt_BR
@@ -94,7 +94,7 @@ dosya adý tamamlama ve þýk komut imleri gibi özellikler sunar.
 
 %package static
 Summary:	Statically linked Enhanced c-shell
-Summary(pl):	Statycznie zlinkowany zaawansowany C-shell
+Summary(pl):	Skonsolidowana statycznie zaawansowana pow³oka C
 Group:		Applications/Shells
 Requires(post,preun):	grep
 Requires(preun):	fileutils
@@ -108,10 +108,10 @@ prompts.
 This packege contains statically linked version of tcsh.
 
 %description static -l pl
-Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi
+Tcsh jest zaawansowan± wersj± pow³oki csh (C-shell), z ró¿norodnymi
 udogodnieniami takimi jak historia komend itp.
 
-W tym pakiecie jest statycznie zlinkowany tcsh.
+W tym pakiecie jest statycznie skonsolidowany tcsh.
 
 %prep
 %setup 	-q
