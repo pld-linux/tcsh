@@ -20,6 +20,7 @@ Release:	5
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
+# Source0-md5: dccf1e673103594546fe74c313932428
 Source1:	csh.cshrc
 Source2:	%{name}-skel-.login
 Patch0:		%{name}-utmp.patch
