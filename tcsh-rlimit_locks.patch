@@ -1,0 +1,60 @@
+--- tcsh-6.10.00.old/sh.func.c	Mon Apr 16 18:56:25 2001
++++ tcsh-6.10.00/sh.func.c	Tue Apr 17 14:42:45 2001
+@@ -1823,6 +1823,10 @@
+     { RLIMIT_OFILE,	"openfiles",	1,	""		},
+ # endif /* RLIMIT_OFILE */
+ 
++# ifdef RLIMIT_LOCKS
++    { RLIMIT_LOCKS,	"flocks",	1,	""		},
++# endif /* RLIMIG_LOCKS */
++
+     { -1, 		NULL, 		0, 	NULL		}
+ };
+ 
+@@ -2032,8 +2036,12 @@
+ # endif /* BSDLIMIT */
+     RLIM_TYPE limit;
+     int     div = lp->limdiv;
++    int	limret;
+ 
+-    xprintf("%s \t", lp->limname);
++    if ( lp->limconst != RLIMIT_LOCKS )
++	    xprintf("%s \t", lp->limname);
++    else
++	    xprintf("%s \t\t", lp->limname);
+ 
+ # ifndef BSDLIMIT
+     limit = ulimit(lp->limconst, 0);
+@@ -2042,7 +2050,12 @@
+ 	limit -= 0x20000000;
+ #  endif /* aiws */
+ # else /* BSDLIMIT */
+-    (void) getrlimit(lp->limconst, &rlim);
++    limret = getrlimit(lp->limconst, &rlim);
++    if ( ( limret < 0 ) && 
++	 ( errno == EINVAL ) &&
++	 ( lp->limconst == RLIMIT_LOCKS ) ) {
++	    rlim.rlim_max = rlim.rlim_cur = RLIM_INFINITY;
++    }
+     limit = hard ? rlim.rlim_max : rlim.rlim_cur;
+ # endif /* BSDLIMIT */
+ 
+@@ -2138,6 +2151,11 @@
+ 	rlim.rlim_cur = limit;
+ 
+     if (setrlimit(lp->limconst, &rlim) < 0) {
++       if ( ( lp->limconst == RLIMIT_LOCKS ) &&
++	    ( errno == EINVAL ) ) {
++	       xprintf(CGETS(15, 5, "cannot set it on the current kernel\n"));
++	       return(0);
++       }
+ # else /* BSDLIMIT */
+     if (limit != RLIM_INFINITY && lp->limconst == RLIMIT_FSIZE)
+ 	limit /= 512;
+--- tcsh-6.10.00.old/nls/C/set15	Sat Oct 19 15:52:32 1996
++++ tcsh-6.10.00/nls/C/set15	Tue Apr 17 14:42:55 2001
+@@ -5,3 +5,4 @@
+ 2 remove
+ 3 set
+ 4 \040hard
++5 cannot set it on the current kernel\n
