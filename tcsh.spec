@@ -70,11 +70,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 
 %build
 autoconf
-CFLAGS=$RPM_OPT_FLAGS \
-    ./configure \
-    --prefix=%{_prefix} \
-    --datadir=%{_datadir} \
-    %{_target_platform}
+%configure
 
 make LDFLAGS="-static" LIBES="-lncurses -lcrypt"
 mv tcsh tcsh.static
@@ -84,8 +80,7 @@ make LIBES="-lncurses -lcrypt"
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{etc,%{_mandir}/man1,bin}
-install -s tcsh $RPM_BUILD_ROOT/bin/tcsh
-install -s tcsh.static $RPM_BUILD_ROOT/bin/tcsh.static
+install -s tcsh tcsh.static $RPM_BUILD_ROOT/bin
 
 install tcsh.man $RPM_BUILD_ROOT%{_mandir}/man1/tcsh.1
 echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
@@ -95,8 +90,8 @@ nroff -me eight-bit.me > eight-bit.txt
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc
 
-gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man1/* 
-gzip -9fn NewThings FAQ eight-bit.txt complete.tcsh
+gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man1/* \
+	NewThings FAQ eight-bit.txt complete.tcsh
 
 %post
 if [ ! -f /etc/shells ]; then
