@@ -1,0 +1,24 @@
+diff -Nru tcsh-6.09.00/tc.who.c tcsh-6.09.00.new/tc.who.c
+--- tcsh-6.09.00/tc.who.c	Sat Aug 19 20:13:44 2000
++++ tcsh-6.09.00.new/tc.who.c	Sat Aug 19 19:33:15 2000
+@@ -232,20 +232,6 @@
+     ncbs_posted = 0;
+ #else /* !WINNT */
+ 
+-    /*
+-     * From: Michael Schroeder <mlschroe@immd4.informatik.uni-erlangen.de>
+-     * Don't open utmp all the time, stat it first...
+-     */
+-    if (stat(_PATH_UTMP, &sta)) {
+-	xprintf(CGETS(26, 1, "cannot stat %s.  Please \"unset watch\".\n"),
+-		_PATH_UTMP);
+-# ifdef BSDSIGS
+-	(void) sigsetmask(omask);
+-# else
+-	(void) sigrelse(SIGINT);
+-# endif
+-	return;
+-    }
+     if (stlast == sta.st_mtime) {
+ # ifdef BSDSIGS
+ 	(void) sigsetmask(omask);
