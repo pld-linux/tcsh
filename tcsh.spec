@@ -7,17 +7,18 @@ Name:		tcsh
 %define		ver	6.09
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	1
+Release:	2
 Copyright:	distributable
 Group:		Shells
 Group(pl):	Pow³oki
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{ver}.tar.gz
 Source1:	csh.cshrc
 Source2:	tcsh-skel-.login
-Patch0:		%{name}-utmp.patch
-Patch1:		%{name}-security.patch
-Patch2:		%{name}-misc.patch
-Patch3:		%{name}-fhs.patch
+Patch0:		tcsh-utmp.patch
+Patch1:		tcsh-security.patch
+Patch2:		tcsh-misc.patch
+Patch3:		tcsh-fhs.patch
+Patch4:		tcsh-pathmax.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
@@ -25,6 +26,8 @@ BuildRequires:	ncurses-devel
 BuildRequires:	ncurses-static
 BuildRequires:	glibc-static
 Buildroot:	/tmp/%{name}-%{version}-root
+
+%define		_bindir		/bin
 
 %description
 'tcsh' is an enhanced version of csh (the C shell), with additional features
@@ -50,7 +53,7 @@ tamamlama ve þýk komut imleri gibi özellikler sunar.
 
 %package static
 Summary:	Statcly linked Enhanced c-shell
-Summary(pl):	Statycznie zlinkowany Zaawansowany C-shell
+Summary(pl):	Statycznie linkowany Zaawansowany C-shell
 Group:		Shells
 Group(pl):	Pow³oki
 Requires:	%{name}
@@ -65,7 +68,7 @@ This packege contains staticly linked version of tcsh.
 Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi 
 udogodnieniami takimi jak historia komend itp.
 
-W tym pakiecie jest statycznie zlinkowany tcsh.
+W tym pakiecie jest statycznie linkowany tcsh.
 
 %prep
 %setup 	-q
@@ -73,6 +76,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch1 -p1 
 %patch2 -p1 
 %patch3	-p1
+%patch4	-p1
 
 %build
 autoconf
