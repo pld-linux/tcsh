@@ -15,6 +15,12 @@ setenv HOSTNAME `/bin/hostname`
 set histfile="$HOME/.history"
 set history=1000
 set savehist=1000
+set autoexpand
+set autolist
+
+# Key bindings
+bindkey "^R" i-search-back        # i-search
+
 
 foreach i ( /etc/env.d/* )
 	set NAME=`basename $i`
