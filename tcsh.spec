@@ -1,7 +1,7 @@
 Summary:	Enhanced c-shell
 Summary(de):	Erweiterte C-Shell
 Summary(fr):	Shell C amélioré.
-Summary(pl):	Zaawansowany C-shell -- wprawdzie nie tak jak bash ale ... ;)
+Summary(pl):	Zaawansowany C-shell
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
 Version:	6.08.01
@@ -11,6 +11,7 @@ Group:		Shells
 Group(pl):	Pow³oki
 Source0:	ftp://ftp.ee.cornell.edu/pub/tcsh/%{name}-%{version}.tar.gz
 Source1:	csh.cshrc
+Source2:	tcsh-skel-.login
 Patch0:		%{name}-utmp.patch
 Patch1:		%{name}-security.patch
 Patch2:		%{name}-misc.patch
@@ -24,10 +25,6 @@ Buildroot:	/tmp/%{name}-%{version}-root
 'tcsh' is an enhanced version of csh (the C shell), with additional features
 such as command history, filename completion, and fancier prompts.
 
-%description -l pl
-Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi 
-udogodnieniami takimi jak historia komend itp.
-
 %description -l de
 'tcsh' ist eine erweiterte Version von csh (der C-Shell) mit zusätzlichen
 Funktionen wie Befehlsgeschichte, Dateinamenvervollständigung und
@@ -37,6 +34,10 @@ attraktiveren Prompts.
 'tcsh' est une version améliorée de csh (le shell C), avec des
 fonctionnalités supplémentaires comme un historique des commandes,
 la complétion des noms de fichiers, et des prompts sympas.
+
+%description -l pl
+Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi 
+udogodnieniami takimi jak historia komend itp.
 
 %description -l tr
 tcsh, csh'in (C kabuðu) geliþkin bir sürümüdür ve komut tarihçesi, dosya adý
@@ -79,7 +80,7 @@ make LIBES="-lncurses -lcrypt"
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{etc,%{_mandir}/man1,bin}
+install -d $RPM_BUILD_ROOT/{etc/skel/C,%{_mandir}/man1,bin}
 install -s tcsh tcsh.static $RPM_BUILD_ROOT/bin
 
 install tcsh.man $RPM_BUILD_ROOT%{_mandir}/man1/tcsh.1
@@ -89,6 +90,7 @@ ln -sf tcsh $RPM_BUILD_ROOT/bin/csh
 nroff -me eight-bit.me > eight-bit.txt
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/skel/C/.login
 
 gzip -9fn $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	NewThings FAQ eight-bit.txt complete.tcsh
@@ -126,6 +128,8 @@ fi
 %doc {NewThings,FAQ,eight-bit.txt,complete.tcsh}.gz
 
 /etc/csh.*
+/etc/skel/C/*
+
 %attr(755,root,root) /bin/csh
 %attr(755,root,root) /bin/tcsh
 %{_mandir}/man1/*
