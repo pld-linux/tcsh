@@ -15,11 +15,11 @@ Summary(ru):	Улучшеная версия csh
 Summary(tr):	GeliЧmiЧ c-kabuПu (c-shell)
 Summary(uk):	Покращена верся csh
 Name:		tcsh
-Version:	6.10.02
-Release:	3
+Version:	6.12.00
+Release:	1
 License:	distributable
 Group:		Applications/Shells
-Source0:	ftp://ftp.fujitsu.co.jp/pub/misc/shells/tcsh/%{name}-%{version}.tgz
+Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
 Source1:	csh.cshrc
 Source2:	%{name}-skel-.login
 Patch0:		%{name}-utmp.patch
@@ -30,7 +30,6 @@ Patch3:		%{name}-termios.patch
 Patch5:		%{name}-no_stat_utmp.patch
 Patch6:		%{name}-locale.patch
 Patch7:		%{name}-time.patch
-Patch8:		%{name}-login.patch
 Patch9:		%{name}-rlimit_locks.patch
 Patch10:	%{name}-dspmbyte.patch
 Provides:	csh
@@ -110,13 +109,12 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %setup 	-q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+%patch2 -p0
 %patch3	-p1
 %{!?_with_working_history: %{__patch} -p1 -s < %{PATCH4} }
 %patch5	-p1
 %patch6	-p1
 %patch7	-p1
-%patch8	-p1
 %patch9	-p1
 #%patch10 -p1
 
