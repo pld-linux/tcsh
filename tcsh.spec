@@ -17,13 +17,14 @@ Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Summary(uk):	ðÏËÒÁÝÅÎÁ ×ÅÒÓÑ csh
 Name:		tcsh
 Version:	6.12.00
-Release:	7
+Release:	8
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
 # Source0-md5: dccf1e673103594546fe74c313932428
 Source1:	csh.cshrc
-Source2:	%{name}-skel-.login
+Source2:	csh.login
+Source3:	%{name}-skel-.login
 Patch0:		%{name}-utmp.patch
 Patch1:		%{name}-misc.patch
 Patch2:		%{name}-fhs.patch
@@ -166,8 +167,8 @@ echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
 ln -sf tcsh $RPM_BUILD_ROOT%{_bindir}/csh
 nroff -me eight-bit.me > eight-bit.txt
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/skel/.login
+install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/skel/.login
 
 install tcsh.french.cat $RPM_BUILD_ROOT%{_datadir}/locale/fr/tcsh
 install tcsh.italian.cat $RPM_BUILD_ROOT%{_datadir}/locale/it/tcsh
@@ -216,8 +217,8 @@ fi
 %defattr(644,root,root,755)
 %doc NewThings FAQ eight-bit.txt complete.tcsh
 
-%{_sysconfdir}/csh.*
-/etc/skel/.login
+%config(noreplace,missingok) %verify(not md5 size mtime) %{_sysconfdir}/csh.*
+%config(noreplace,missingok) %verify(not md5 size mtime) /etc/skel/.login
 
 %attr(755,root,root) %{_bindir}/csh
 %attr(755,root,root) %{_bindir}/tcsh
