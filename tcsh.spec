@@ -16,7 +16,7 @@ Summary(tr):	GeliЧmiЧ c-kabuПu (c-shell)
 Summary(uk):	Покращена верся csh
 Name:		tcsh
 Version:	6.12.00
-Release:	6
+Release:	7
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
