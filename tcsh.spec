@@ -8,6 +8,7 @@ Summary:	Enhanced c-shell
 Summary(de):	Erweiterte C-Shell
 Summary(es):	C-shell mejorada
 Summary(fr):	Shell C amélioré
+Summary(ko):	cshÀÇ Çâ»óµÈ ¹öÀü
 Summary(pl):	Zaawansowany C-shell
 Summary(pt_BR):	C-shell melhorada
 Summary(ru):	õÌÕÞÛÅÎÁÑ ×ÅÒÓÉÑ csh
@@ -15,7 +16,7 @@ Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Summary(uk):	ðÏËÒÁÝÅÎÁ ×ÅÒÓÑ csh
 Name:		tcsh
 Version:	6.12.00
-Release:	1
+Release:	5
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
@@ -31,7 +32,9 @@ Patch6:		%{name}-locale.patch
 Patch7:		%{name}-time.patch
 Patch9:		%{name}-rlimit_locks.patch
 Patch10:	%{name}-dspmbyte.patch
+Patch11:	%{name}-no_TERMCAP.patch
 BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	glibc-static
 BuildRequires:	groff
 BuildRequires:	ncurses-devel >= 5.0
@@ -117,9 +120,11 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch6	-p1
 %patch7	-p1
 %patch9	-p1
-#%patch10 -p1
+%patch10 -p1
+%patch11 -p1
 
 %build
+%{__aclocal}
 %{__autoconf}
 %configure
 
