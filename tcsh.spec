@@ -7,7 +7,7 @@ Name:		tcsh
 %define		ver	6.09
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	7
+Release:	8
 Copyright:	distributable
 Group:		Shells
 Group(pl):	Pow³oki
@@ -23,6 +23,7 @@ Patch5:		%{name}-strcoll.patch
 Patch6:		%{name}-termios.patch
 Patch7:		%{name}-no-timestamp-history.patch
 Patch8:		%{name}-no_stat_utmp.patch
+Patch9:		%{name}-locale.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
@@ -87,19 +88,23 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch6	-p1
 %patch7	-p1
 %patch8	-p1
+%patch9	-p1
 
 %build
 autoconf
 %configure
 
-%{__make} LDFLAGS="-static -s" LIBES="-ltinfo -lcrypt -lnsl"
+%{__make} LDFLAGS="-static -s" LIBES="-ltinfo -lcrypt"
 mv tcsh tcsh.static
-%{__make} LDFLAGS="-s" LIBES="-ltinfo -lcrypt -lnsl"
+%{__make} LDFLAGS="-s" LIBES="-ltinfo -lcrypt"
+
+make -C nls
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT/{etc/skel/C,%{_mandir}/man1,%{_bindir}} \
+	$RPM_BUILD_ROOT%{_datadir}/locale/{fr,it,ja,gr,es}
 
-install -d $RPM_BUILD_ROOT/{etc/skel/C,%{_mandir}/man1,bin}
 install tcsh tcsh.static $RPM_BUILD_ROOT%{_bindir}
 
 install tcsh.man $RPM_BUILD_ROOT%{_mandir}/man1/tcsh.1
@@ -110,6 +115,12 @@ nroff -me eight-bit.me > eight-bit.txt
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/skel/C/.login
+
+install tcsh.french.cat $RPM_BUILD_ROOT%{_datadir}/locale/fr/tcsh
+install tcsh.italian.cat $RPM_BUILD_ROOT%{_datadir}/locale/it/tcsh
+install tcsh.ja.cat $RPM_BUILD_ROOT%{_datadir}/locale/ja/tcsh
+install tcsh.greek.cat $RPM_BUILD_ROOT%{_datadir}/locale/gr/tcsh
+install tcsh.spanish.cat $RPM_BUILD_ROOT%{_datadir}/locale/es/tcsh
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
 	NewThings FAQ eight-bit.txt complete.tcsh
@@ -151,6 +162,11 @@ fi
 
 %attr(755,root,root) %{_bindir}/csh
 %attr(755,root,root) %{_bindir}/tcsh
+%lang(fr) %{_datadir}/locale/fr/tcsh
+%lang(it) %{_datadir}/locale/it/tcsh
+%lang(ja) %{_datadir}/locale/ja/tcsh
+%lang(gr) %{_datadir}/locale/gr/tcsh
+%lang(es) %{_datadir}/locale/es/tcsh
 %{_mandir}/man1/*
 
 %clean
