@@ -4,12 +4,14 @@ Summary(fr):	Shell C amélioré.
 Summary(pl):	Zaawansowany C-shell
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
-Version:	6.08.01
-Release:	2
+%define		ver	6.09
+%define		sub_ver	00
+Version:	%{ver}.%{sub_ver}
+Release:	1
 Copyright:	distributable
 Group:		Shells
 Group(pl):	Pow³oki
-Source0:	ftp://ftp.ee.cornell.edu/pub/tcsh/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{ver}.tar.gz
 Source1:	csh.cshrc
 Source2:	tcsh-skel-.login
 Patch0:		%{name}-utmp.patch
@@ -63,7 +65,7 @@ udogodnieniami takimi jak historia komend itp.
 W tym pakiecie jest statycznie zlinkowany tcsh.
 
 %prep
-%setup 	-q -n %{name}-%{version}
+%setup 	-q
 %patch0 -p1 
 %patch1 -p1 
 %patch2 -p1 
@@ -73,15 +75,15 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 autoconf
 %configure
 
-make LDFLAGS="-static" LIBES="-lncurses -lcrypt"
+make LDFLAGS="-static -s" LIBES="-lncurses -lcrypt"
 mv tcsh tcsh.static
-make LIBES="-lncurses -lcrypt"
+make LDFLAGS="-s" LIBES="-lncurses -lcrypt"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{etc/skel/C,%{_mandir}/man1,bin}
-install -s tcsh tcsh.static $RPM_BUILD_ROOT/bin
+install tcsh tcsh.static $RPM_BUILD_ROOT/bin
 
 install tcsh.man $RPM_BUILD_ROOT%{_mandir}/man1/tcsh.1
 echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
