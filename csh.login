@@ -35,11 +35,11 @@ foreach i ( /etc/env.d/* )
 		grep -v "^#" $i | head -n 1 > /dev/null
 		if ($status == 0) then
 			set backslash_quote
-			set j = `grep -v "^#" $i |head -n 1`
-			eval set "$j"
+			set j = `grep -v "^#" $i |head -n 1|cut -s -d= -f1,2 --output-delimiter=' '`
+			eval setenv "$j"
 			# FIXME: how to retrieve something like $$NAME ??
 			# This is not working
-			setenv $NAME "$NAME"
+			#setenv $NAME "$NAME"
 		endif
 		breaksw
 	endsw
