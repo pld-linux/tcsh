@@ -1,0 +1,11 @@
+--- tcsh-6.09.00/sh.hist.c~	Sat Feb  6 16:01:23 1999
++++ tcsh-6.09.00/sh.hist.c	Mon May 29 21:59:45 2000
+@@ -396,7 +396,7 @@
+     Char    *snum;
+     int     fp, ftmp, oldidfds;
+     struct varent *shist;
+-    static Char   *dumphist[] = {STRhistory, STRmhT, 0, 0};
++    static Char   *dumphist[] = {STRhistory, STRmh, 0, 0};
+ 
+     if (fname == NULL && !ref) 
+ 	return;
