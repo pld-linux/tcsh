@@ -27,6 +27,7 @@ Patch10:	%{name}-dspmbyte.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
+BuildRequires:	autoconf
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	ncurses-static
 BuildRequires:	glibc-static
@@ -126,6 +127,9 @@ install tcsh.spanish.cat $RPM_BUILD_ROOT%{_datadir}/locale/es/tcsh
 
 gzip -9nf NewThings FAQ eight-bit.txt complete.tcsh
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 if [ ! -f /etc/shells ]; then
 	echo "%{_bindir}/tcsh" > /etc/shells
@@ -169,9 +173,6 @@ fi
 %lang(gr) %{_datadir}/locale/gr/tcsh
 %lang(es) %{_datadir}/locale/es/tcsh
 %{_mandir}/man1/*
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files static
 %defattr(644,root,root,755)
