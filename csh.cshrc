@@ -21,7 +21,9 @@ else
 endif
 
 setenv HOSTNAME `/bin/hostname`
+set histfile="$HOME/.history"
 set history=1000
+set savehist=1000
 
 test -d /etc/profile.d
 if ($status == 0) then
