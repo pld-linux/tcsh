@@ -16,27 +16,25 @@ Summary(ru):	Улучшеная версия csh
 Summary(tr):	GeliЧmiЧ c-kabuПu (c-shell)
 Summary(uk):	Покращена верся csh
 Name:		tcsh
-Version:	6.12.00
-Release:	8
+Version:	6.13.00
+Release:	1
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
-# Source0-md5: dccf1e673103594546fe74c313932428
+# Source0-md5:	11c0c9c9148652dc01270c4880d1cc6e
 Source1:	csh.cshrc
 Source2:	csh.login
 Source3:	%{name}-skel-.login
 Patch0:		%{name}-utmp.patch
 Patch1:		%{name}-misc.patch
-Patch2:		%{name}-fhs.patch
-Patch3:		%{name}-termios.patch
-Patch4:		%{name}-no-timestamp-history.patch
-Patch5:		%{name}-no_stat_utmp.patch
-Patch6:		%{name}-locale.patch
-Patch7:		%{name}-time.patch
-Patch8:		%{name}-rlimit_locks.patch
-Patch9:		%{name}-dspmbyte.patch
-Patch10:	%{name}-no_TERMCAP.patch
-Patch11:	%{name}-nls-codesets.patch
+Patch2:		%{name}-termios.patch
+Patch3:		%{name}-no-timestamp-history.patch
+Patch4:		%{name}-no_stat_utmp.patch
+Patch5:		%{name}-time.patch
+Patch6:		%{name}-rlimit_locks.patch
+Patch7:		%{name}-dspmbyte.patch
+Patch8:		%{name}-no_TERMCAP.patch
+Patch9:		%{name}-nls-codesets.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	groff
@@ -118,21 +116,17 @@ udogodnieniami takimi jak historia komend itp.
 W tym pakiecie jest statycznie skonsolidowany tcsh.
 
 %prep
-%setup 	-q
+%setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p0
-%patch3	-p1
-%{?with_working_history:%{__patch} -p1 -s < %{PATCH4}}
+%patch2	-p1
+%{!?with_working_history:%patch3 -p1}
+%patch4	-p1
 %patch5	-p1
 %patch6	-p1
-%patch7	-p1
-%patch8	-p1
-## it was meant to add multibyte character support, but it breaks
-## non-ascii chars in 1-byte encodings - don't uncomment unless you fix it!
-##%patch9 -p1
-%patch10 -p1
-%patch11 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
 
 %build
 cp /usr/share/automake/config.sub .
@@ -189,21 +183,19 @@ else
 	grep -q '^%{_bindir}/csh$' /etc/shells || echo "%{_bindir}/csh" >> /etc/shells
 fi
 
-%if %{with static}
+%preun
+umask 022
+if [ "$1" = "0" ]; then
+	grep -v '^%{_bindir}/t\?csh$' /etc/shells > /etc/shells.new
+	mv -f /etc/shells.new /etc/shells
+fi
+
 %post static
 umask 022
 if [ ! -f /etc/shells ]; then
 	echo "%{_bindir}/tcsh.static" > /etc/shells
 else
 	grep -q '^%{_bindir}/tcsh\.static$' /etc/shells || echo "%{_bindir}/tcsh.static" >> /etc/shells
-fi
-%endif
-
-%preun
-umask 022
-if [ "$1" = "0" ]; then
-	grep -v '^%{_bindir}/t\?csh$' /etc/shells > /etc/shells.new
-	mv -f /etc/shells.new /etc/shells
 fi
 
 %preun static
