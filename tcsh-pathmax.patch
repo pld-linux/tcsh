@@ -1,0 +1,25 @@
+--- tcsh-6.08.00/tw.h~	Thu Oct  2 12:36:35 1997
++++ tcsh-6.08.00/tw.h	Wed Feb 24 21:36:01 1999
+@@ -77,7 +77,7 @@
+ #endif
+ #define ON		1
+ #define OFF		0
+-#define FILSIZ		512	/* Max reasonable file name length */
++#define FILSIZ		MAXPATHLEN	/* Max reasonable file name length */
+ #define ESC             CTL_ESC('\033')
+ #define equal(a, b)	(strcmp(a, b) == 0)
+ 
+--- tcsh-6.08.00/sh.h~	Wed Feb 24 21:32:40 1999
++++ tcsh-6.08.00/sh.h	Wed Feb 24 21:42:48 1999
+@@ -507,6 +507,11 @@
+  * April, 1980
+  */
+ 
++#if !defined(MAXNAMLEN) && defined(PATH_MAX)
++# error "Sucker"
++# define MAXNAMLEN PATH_MAX
++#endif /* MAXNAMLEN */
++
+ #if !defined(MAXNAMLEN) && defined(_D_NAME_MAX)
+ # define MAXNAMLEN _D_NAME_MAX
+ #endif /* MAXNAMLEN */
