@@ -7,9 +7,13 @@
 
 Summary:	Enhanced c-shell
 Summary(de):	Erweiterte C-Shell
+Summary(es):	C-shell mejorada
 Summary(fr):	Shell C amИliorИ
 Summary(pl):	Zaawansowany C-shell
+Summary(pt_BR):	C-shell melhorada
+Summary(ru):	Улучшеная версия csh
 Summary(tr):	GeliЧmiЧ c-kabuПu (c-shell)
+Summary(uk):	Покращена верся csh
 Name:		tcsh
 Version:	6.10.02
 Release:	3
@@ -50,6 +54,11 @@ prompts.
 zusДtzlichen Funktionen wie Befehlsgeschichte,
 DateinamenvervollstДndigung und attraktiveren Prompts.
 
+%description -l es
+"tcsh" es una versiСn mejorada de la csh (C shell), con
+caracterМsticas adicionales como historia de los comandos, complemento
+de nombre de archivo y prompts.
+
 %description -l fr
 'tcsh' est une version amИliorИe de csh (le shell C), avec des
 fonctionnalitИs supplИmentaires comme un historique des commandes, la
@@ -59,9 +68,23 @@ complИtion des noms de fichiers, et des prompts sympas.
 Tcsh jest zaawansowanym wersj╠ shella csh (C-shell), z rС©norodnymi
 udogodnieniami takimi jak historia komend itp.
 
+%description -l pt_BR
+"tcsh" И uma versЦo melhorada da csh (C shell), com caracterМsticas
+adicionais como history dos comandos, complemento de nome de arquivo e
+prompts.
+
+%description -l ru
+Это улучшенная версия csh (the C shell) с дополнительными
+возможностями, такими как история комманд, дополнение имен файлов и
+т.д.
+
 %description -l tr
 tcsh, csh'in (C kabuПu) geliЧkin bir sЭrЭmЭdЭr ve komut tarihГesi,
 dosya adЩ tamamlama ve ЧЩk komut imleri gibi Жzellikler sunar.
+
+%description -l uk
+Це покращена верс╕я csh (the C shell) з додатковими можливостями,
+такими як ╕стор╕я команд, завершення ╕мен файл╕в ╕ т.╕.
 
 %package static
 Summary:	Statically linked Enhanced c-shell
