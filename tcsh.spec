@@ -8,8 +8,6 @@ Version:	6.10.02
 Release:	1
 License:	distributable
 Group:		Applications/Shells
-Group(de):	Applikationen/Shells
-Group(pl):	Aplikacje/Pow³oki
 Source0:	ftp://ftp.fujitsu.co.jp/pub/misc/shells/tcsh/%{name}-%{version}.tgz
 Source1:	csh.cshrc
 Source2:	%{name}-skel-.login
@@ -62,8 +60,6 @@ dosya adý tamamlama ve þýk komut imleri gibi özellikler sunar.
 Summary:	Statically linked Enhanced c-shell
 Summary(pl):	Statycznie zlinkowany zaawansowany C-shell
 Group:		Applications/Shells
-Group(de):	Applikationen/Shells
-Group(pl):	Aplikacje/Pow³oki
 Requires:	%{name}
 
 %description static
