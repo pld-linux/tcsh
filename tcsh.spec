@@ -59,7 +59,7 @@ tcsh, csh'in (C kabuðu) geliþkin bir sürümüdür ve komut tarihçesi,
 dosya adý tamamlama ve þýk komut imleri gibi özellikler sunar.
 
 %package static
-Summary:	Staticaly linked Enhanced c-shell
+Summary:	Statically linked Enhanced c-shell
 Summary(pl):	Statycznie zlinkowany zaawansowany C-shell
 Group:		Applications/Shells
 Group(de):	Applikationen/Shells
