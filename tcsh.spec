@@ -3,6 +3,7 @@
 # _with_working_history - compiles tcsh with timestamps in ~/.history file so
 #                         it serves any real purpose (which is not the case
 #                         for default PLD tcsh)
+%bcond_without	static
 #
 Summary:	Enhanced c-shell
 Summary(de):	Erweiterte C-Shell
@@ -37,12 +38,16 @@ Patch10:	%{name}-no_TERMCAP.patch
 Patch11:	%{name}-nls-codesets.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
+%if %{with static}
 BuildRequires:	glibc-static
+%endif
 BuildRequires:	groff
 # for gencat
 BuildRequires:	iconv
 BuildRequires:	ncurses-devel >= 5.0
+%if %{with static}
 BuildRequires:	ncurses-static
+%endif
 Requires(post,preun):	grep
 Requires(preun):	fileutils
 Provides:	csh
@@ -92,6 +97,7 @@ dosya adý tamamlama ve þýk komut imleri gibi özellikler sunar.
 ãÅ ÐÏËÒÁÝÅÎÁ ×ÅÒÓ¦Ñ csh (the C shell) Ú ÄÏÄÁÔËÏ×ÉÍÉ ÍÏÖÌÉ×ÏÓÔÑÍÉ,
 ÔÁËÉÍÉ ÑË ¦ÓÔÏÒ¦Ñ ËÏÍÁÎÄ, ÚÁ×ÅÒÛÅÎÎÑ ¦ÍÅÎ ÆÁÊÌ¦× ¦ Ô.¦.
 
+%if %{with static}
 %package static
 Summary:	Statically linked Enhanced c-shell
 Summary(pl):	Skonsolidowana statycznie zaawansowana pow³oka C
@@ -112,6 +118,7 @@ Tcsh jest zaawansowan± wersj± pow³oki csh (C-shell), z ró¿norodnymi
 udogodnieniami takimi jak historia komend itp.
 
 W tym pakiecie jest statycznie skonsolidowany tcsh.
+%endif 
 
 %prep
 %setup 	-q
@@ -135,9 +142,10 @@ cp /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
 %configure
-
+%if %{with static}
 %{__make} LDFLAGS="-static %{rpmldflags}" LIBES="-ltinfo -lcrypt"
 mv -f tcsh tcsh.static
+%endif
 %{__make} LDFLAGS="%{rpmldflags}" LIBES="-ltinfo -lcrypt"
 
 %{__make} -C nls
@@ -147,7 +155,10 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/skel,%{_mandir}/man1,%{_bindir}} \
 	$RPM_BUILD_ROOT%{_datadir}/locale/{el,es,fr,it,ja}
 
-install tcsh tcsh.static $RPM_BUILD_ROOT%{_bindir}
+%if %{with static}
+install tcsh.static $RPM_BUILD_ROOT%{_bindir}
+%endif
+install tcsh $RPM_BUILD_ROOT%{_bindir}
 
 install tcsh.man $RPM_BUILD_ROOT%{_mandir}/man1/tcsh.1
 echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
@@ -177,6 +188,7 @@ else
 	grep -q '^%{_bindir}/csh$' /etc/shells || echo "%{_bindir}/csh" >> /etc/shells
 fi
 
+%if %{with static}
 %post static
 umask 022
 if [ ! -f /etc/shells ]; then
@@ -184,6 +196,7 @@ if [ ! -f /etc/shells ]; then
 else
 	grep -q '^%{_bindir}/tcsh\.static$' /etc/shells || echo "%{_bindir}/tcsh.static" >> /etc/shells
 fi
+%endif
 
 %preun
 umask 022
@@ -192,12 +205,14 @@ if [ "$1" = "0" ]; then
 	mv -f /etc/shells.new /etc/shells
 fi
 
+%if %{with static}
 %preun static
 umask 022
 if [ "$1" = "0" ]; then
 	grep -v '^%{_bindir}/tcsh\.static$' /etc/shells > /etc/shells.new
 	mv -f /etc/shells.new /etc/shells
 fi
+%endif
 
 %files
 %defattr(644,root,root,755)
@@ -215,6 +230,8 @@ fi
 %lang(es) %{_datadir}/locale/es/tcsh
 %{_mandir}/man1/*
 
+%if %{with static}
 %files static
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/tcsh.static
+%endif
