@@ -5,7 +5,7 @@ Summary(pl):	Zaawansowany C-shell
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
 Version:	6.10.01
-Release:	6
+Release:	7
 License:	Distributable
 Group:		Shells
 Group(pl):	Pow³oki
@@ -88,14 +88,14 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch7	-p1
 %patch8	-p1
 %patch9	-p1
-%patch10 -p1
+#%patch10 -p1
 
 %build
 autoconf
 %configure
 
 %{__make} LDFLAGS="-static %{rpmldflags}" LIBES="-ltinfo -lcrypt"
-mv tcsh tcsh.static
+mv -f tcsh tcsh.static
 %{__make} LDFLAGS="%{rpmldflags}" LIBES="-ltinfo -lcrypt"
 
 make -C nls
