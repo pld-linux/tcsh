@@ -121,8 +121,6 @@ install tcsh.ja.cat $RPM_BUILD_ROOT%{_datadir}/locale/ja/tcsh
 install tcsh.greek.cat $RPM_BUILD_ROOT%{_datadir}/locale/el/tcsh
 install tcsh.spanish.cat $RPM_BUILD_ROOT%{_datadir}/locale/es/tcsh
 
-gzip -9nf NewThings FAQ eight-bit.txt complete.tcsh
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -156,7 +154,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc {NewThings,FAQ,eight-bit.txt,complete.tcsh}.gz
+%doc NewThings FAQ eight-bit.txt complete.tcsh
 
 %{_sysconfdir}/csh.*
 /etc/skel/.login
