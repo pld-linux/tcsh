@@ -121,7 +121,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 
 %build
 %{__autoconf}
-%configure2_13
+%configure
 
 %{__make} LDFLAGS="-static %{rpmldflags}" LIBES="-ltinfo -lcrypt"
 mv -f tcsh tcsh.static
