@@ -21,6 +21,9 @@ Patch3:		%{name}-fhs.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
+BuildRequires:	ncurses-devel
+BuildRequires:	ncurses-static
+BuildRequires:	glibc-static
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
