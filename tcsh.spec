@@ -7,7 +7,7 @@ Name:		tcsh
 %define		ver	6.09
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	5
+Release:	6
 Copyright:	distributable
 Group:		Shells
 Group(pl):	Pow³oki
