@@ -18,7 +18,7 @@ Patch2:      tcsh-security.patch
 Provides:    csh
 Prereq:      fileutils grep
 URL:         http://www.primate.wisc.edu/software/csh-tcsh-book/
-Buildroot:   /tmp/%{name}-%{version}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 'tcsh' is an enhanced version of csh (the C shell), with additional features
