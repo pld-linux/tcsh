@@ -7,7 +7,7 @@ Name:		tcsh
 %define		ver	6.09
 %define		sub_ver	00
 Version:	%{ver}.%{sub_ver}
-Release:	8
+Release:	9
 Copyright:	distributable
 Group:		Shells
 Group(pl):	Pow³oki
@@ -24,6 +24,7 @@ Patch6:		%{name}-termios.patch
 Patch7:		%{name}-no-timestamp-history.patch
 Patch8:		%{name}-no_stat_utmp.patch
 Patch9:		%{name}-locale.patch
+Patch10:	%{name}-time.patch
 Provides:	csh
 Prereq:		fileutils
 Prereq:		grep
@@ -89,14 +90,15 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch7	-p1
 %patch8	-p1
 %patch9	-p1
+%patch10 -p1
 
 %build
 autoconf
 %configure
 
-%{__make} LDFLAGS="-static -s" LIBES="-ltinfo -lcrypt"
+%{__make} LDFLAGS="-static %{!?debug:-s}" LIBES="-ltinfo -lcrypt"
 mv tcsh tcsh.static
-%{__make} LDFLAGS="-s" LIBES="-ltinfo -lcrypt"
+%{__make} LDFLAGS="%{!?debug:-s}" LIBES="-ltinfo -lcrypt"
 
 make -C nls
 
@@ -122,35 +124,34 @@ install tcsh.ja.cat $RPM_BUILD_ROOT%{_datadir}/locale/ja/tcsh
 install tcsh.greek.cat $RPM_BUILD_ROOT%{_datadir}/locale/gr/tcsh
 install tcsh.spanish.cat $RPM_BUILD_ROOT%{_datadir}/locale/es/tcsh
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man1/* \
-	NewThings FAQ eight-bit.txt complete.tcsh
+gzip -9nf NewThings FAQ eight-bit.txt complete.tcsh
 
 %post
 if [ ! -f /etc/shells ]; then
 	echo "%{_bindir}/tcsh" > /etc/shells
 	echo "%{_bindir}/csh" >> /etc/shells
 else
-	grep '^%{_bindir}/tcsh$' /etc/shells > /dev/null || echo "%{_bindir}/tcsh" >> /etc/shells
-	grep '^%{_bindir}/csh$' /etc/shells > /dev/null || echo "%{_bindir}/csh" >> /etc/shells
+	grep -q '^%{_bindir}/tcsh$' /etc/shells || echo "%{_bindir}/tcsh" >> /etc/shells
+	grep -q '^%{_bindir}/csh$' /etc/shells || echo "%{_bindir}/csh" >> /etc/shells
 fi
 
 %post static
 if [ ! -f /etc/shells ]; then
 	echo "%{_bindir}/tcsh.static" > /etc/shells
 else
-	grep '^%{_bindir}/tcsh.static$' /etc/shells > /dev/null || echo "%{_bindir}/tcsh.static" >> /etc/shells
+	grep -q '^%{_bindir}/tcsh\.static$' /etc/shells || echo "%{_bindir}/tcsh.static" >> /etc/shells
 fi
 
-%postun
-if [ ! -x %{_bindir}/tcsh ]; then
-	grep -v '^%{_bindir}/tcsh$' /etc/shells | grep -v '^%{_bindir}/csh$'> /etc/shells.rpm
-	mv -f /etc/shells.rpm /etc/shells
+%preun
+if [ "$1" = "0" ]; then
+	grep -v '^%{_bindir}/t\?csh$' /etc/shells > /etc/shells.new
+	mv -f /etc/shells.new /etc/shells
 fi
 
-%postun static
-if [ ! -x %{_bindir}/tcsh.static ]; then
-	grep -v '^%{_bindir}/tcsh.static$' /etc/shells > /etc/shells.rpm
-	mv -f /etc/shells.rpm /etc/shells
+%preun static
+if [ "$1" = "0" ]; then
+	grep -v '^%{_bindir}/tcsh\.static$' /etc/shells > /etc/shells.new
+	mv -f /etc/shells.new /etc/shells
 fi
 
 %files
