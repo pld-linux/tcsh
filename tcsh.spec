@@ -131,6 +131,7 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 %patch11 -p1
 
 %build
+cp /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
 %configure
