@@ -30,7 +30,7 @@ if ($status == 0) then
 		  default:
 			if ( -r $i ) then
 				set body = `cat $i | grep -v "^#"`
-				if $status then
+				if ($status == 0) then
 					foreach j ( $body )
 						eval set $j
 						setenv $NAME
