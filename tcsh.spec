@@ -34,10 +34,13 @@ Patch7:		%{name}-time.patch
 Patch8:		%{name}-rlimit_locks.patch
 Patch9:		%{name}-dspmbyte.patch
 Patch10:	%{name}-no_TERMCAP.patch
+Patch11:	%{name}-nls-codesets.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glibc-static
 BuildRequires:	groff
+# for gencat
+BuildRequires:	iconv
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	ncurses-static
 Requires(post,preun):	grep
@@ -121,10 +124,11 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch6	-p1
 %patch7	-p1
 %patch8	-p1
-## don't uncomment unless you fix it - it breaks non-ascii chars in 1-byte
-## encodings!
+## it was meant to add multibyte character support, but it breaks
+## non-ascii chars in 1-byte encodings - don't uncomment unless you fix it!
 ##%patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 %{__aclocal}
