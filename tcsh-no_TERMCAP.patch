@@ -1,0 +1,96 @@
+--- tcsh-6.12.00/ed.screen.c~	Sun May 18 04:50:03 2003
++++ tcsh-6.12.00/ed.screen.c	Sun May 18 04:50:03 2003
+@@ -1681,57 +1681,6 @@
+ 	    tsetenv(STRLINES, buf);
+ 	}
+ 
+-	if ((tptr = getenv("TERMCAP")) != NULL) {
+-	    /* Leave 64 characters slop in case we enlarge the termcap string */
+-	    Char    termcap[1024+64], backup[1024+64], *ptr;
+-	    int     i;
+-
+-	    ptr = str2short(tptr);
+-	    (void) Strncpy(termcap, ptr, 1024);
+-	    termcap[1023] = '\0';
+-
+-	    /* update termcap string; first do columns */
+-	    buf[0] = 'c';
+-	    buf[1] = 'o';
+-	    buf[2] = '#';
+-	    buf[3] = '\0';
+-	    if ((ptr = Strstr(termcap, buf)) == NULL) {
+-		(void) Strcpy(backup, termcap);
+-	    }
+-	    else {
+-		i = (int) (ptr - termcap + Strlen(buf));
+-		(void) Strncpy(backup, termcap, (size_t) i);
+-		backup[i] = '\0';
+-		(void) Itoa(Val(T_co), buf, 0, 0);
+-		(void) Strcat(backup + i, buf);
+-		ptr = Strchr(ptr, ':');
+-		(void) Strcat(backup, ptr);
+-	    }
+-
+-	    /* now do lines */
+-	    buf[0] = 'l';
+-	    buf[1] = 'i';
+-	    buf[2] = '#';
+-	    buf[3] = '\0';
+-	    if ((ptr = Strstr(backup, buf)) == NULL) {
+-		(void) Strcpy(termcap, backup);
+-	    }
+-	    else {
+-		i = (int) (ptr - backup + Strlen(buf));
+-		(void) Strncpy(termcap, backup, (size_t) i);
+-		termcap[i] = '\0';
+-		(void) Itoa(Val(T_li), buf, 0, 0);
+-		(void) Strcat(termcap, buf);
+-		ptr = Strchr(ptr, ':');
+-		(void) Strcat(termcap, ptr);
+-	    }
+-	    /*
+-	     * Chop the termcap string at 1024 characters to avoid core-dumps
+-	     * in the termcap routines
+-	     */
+-	    termcap[1023] = '\0';
+-	    tsetenv(STRTERMCAP, termcap);
+-	}
+     }
+ #endif /* KNOWsize */
+ 
+--- tcsh-6.12.00/sh.func.c~	Sun May 18 04:53:01 2003
++++ tcsh-6.12.00/sh.func.c	Sun May 18 04:53:01 2003
+@@ -1465,8 +1465,7 @@
+     /*
+      * Load/Update $LINES $COLUMNS
+      */
+-    if ((eq(lp, STRNULL) && (eq(vp, STRLINES) || eq(vp, STRCOLUMNS))) ||
+-	eq(vp, STRTERMCAP)) {
++    if (eq(lp, STRNULL) && (eq(vp, STRLINES) || eq(vp, STRCOLUMNS))) {
+ 	xfree((ptr_t) lp);
+ 	check_window_size(1);
+ 	return;
+--- tcsh-6.12.00/sh.set.c~	Sun May 18 04:55:02 2003
++++ tcsh-6.12.00/sh.set.c	Sun May 18 04:55:02 2003
+@@ -107,11 +107,6 @@
+     else if (eq(vp, STRterm)) {
+ 	Char *cp = varval(vp);
+ 	tsetenv(STRKTERM, cp);
+-#ifdef DOESNT_WORK_RIGHT
+-	cp = getenv("TERMCAP");
+-	if (cp && (*cp != '/'))	/* if TERMCAP and not a path */
+-	    Unsetenv(STRTERMCAP);
+-#endif /* DOESNT_WORK_RIGHT */
+ 	GotTermCaps = 0;
+ 	if (noediting && Strcmp(cp, STRnetwork) != 0 &&
+ 	    Strcmp(cp, STRunknown) != 0 && Strcmp(cp, STRdumb) != 0) {
+--- tcsh-6.12.00/tc.const.c~	Sun May 18 04:57:51 2003
++++ tcsh-6.12.00/tc.const.c	Sun May 18 04:57:51 2003
+@@ -424,7 +424,6 @@
+ /* atp - problem with declaration of str{lines,columns} in sh.func.c (1277) */
+ Char STRLINES[]		= { 'L', 'I', 'N', 'E', 'S', '\0'};
+ Char STRCOLUMNS[]	= { 'C', 'O', 'L', 'U', 'M', 'N', 'S', '\0'};
+-Char STRTERMCAP[]	= { 'T', 'E', 'R', 'M', 'C', 'A', 'P', '\0'};
+ #endif /* SIG_WINDOW  || _VMS_POSIX */
+ 
+ #ifdef WARP
