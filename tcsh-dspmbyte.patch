@@ -1,21 +1,11 @@
-diff -ruN tcsh-6.10.00.orig/sh.set.c tcsh-6.10.00/sh.set.c
---- tcsh-6.10.00.orig/sh.set.c	Wed Mar 28 16:44:53 2001
-+++ tcsh-6.10.00/sh.set.c	Wed Mar 28 16:53:23 2001
-@@ -41,6 +41,8 @@
- #include "ed.h"
- #include "tw.h"
- 
-+#include <string.h>
-+
- extern Char HistLit;
- extern bool GotTermCaps;
- 
-@@ -1211,7 +1213,7 @@
- 	return;
+--- tcsh-6.13.00/sh.set.c.orig	2004-09-05 12:10:33.633525000 +0200
++++ tcsh-6.13.00/sh.set.c	2004-09-05 12:50:58.626870880 +0200
+@@ -1255,7 +1255,7 @@
  
      for (i = 0; dspmt[i].n; i++) {
--	if (eq(pcp, dspmt[i].n)) {
-+	if (strncasecmp (pcp, dspmt[i].n, strlen (dspmt[i].n))) {
+ 	Char *estr;
+-	if (t_pmatch(pcp, dspmt[i].n, &estr, 1) > 0) {
++	if (dspmt[i].n[0] && t_pmatch(pcp, dspmt[i].n, &estr, 1) > 0) {
  	    set(CHECK_MBYTEVAR, Strsave(dspmt[i].v), VAR_READWRITE);
  	    update_dspmbyte_vars();
  	    break;
