@@ -49,7 +49,7 @@ tamamlama ve þýk komut imleri gibi özellikler sunar.
 %patch2 -p1 -b .security
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=/usr
+%configure
 make LIBES="-lnsl -lncurses -lcrypt" DESTBIN="/bin"
 
 %install
