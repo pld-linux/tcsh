@@ -98,7 +98,7 @@ autoconf
 mv -f tcsh tcsh.static
 %{__make} LDFLAGS="%{rpmldflags}" LIBES="-ltinfo -lcrypt"
 
-make -C nls
+%{__make} -C nls
 
 %install
 rm -rf $RPM_BUILD_ROOT
