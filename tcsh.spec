@@ -95,7 +95,7 @@ fi
 * Mon Nov 16 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [6.08.00-1]
 - /etc/csh.cshrc moved from setup,
-- use -lncurses witch is now in /lib.
+- use -lncurses which is now in /lib.
 
 * Wed Aug  5 1998 Jeff Johnson <jbj@redhat.com>
 - use -ltermcap so that /bin/tcsh can be used in single user mode w/o /usr.
