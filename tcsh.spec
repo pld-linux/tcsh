@@ -1,9 +1,9 @@
 #
 # Conditional build:
-# _with_working_history - compiles tcsh with timestamps in ~/.history file so
-#                         it serves any real purpose (which is not the case
-#                         for default PLD tcsh)
-%bcond_without	static
+%bcond_with	working_history	# compiles tcsh with timestamps in
+#               ~/.history file so it serves any real purpose (which
+#               is not the case for default PLD tcsh)
+%bcond_without	static		# don't build static version
 #
 Summary:	Enhanced c-shell
 Summary(de):	Erweiterte C-Shell
@@ -38,14 +38,12 @@ Patch10:	%{name}-no_TERMCAP.patch
 Patch11:	%{name}-nls-codesets.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-%if %{with static}
-BuildRequires:	glibc-static
-%endif
 BuildRequires:	groff
 # for gencat
 BuildRequires:	iconv
 BuildRequires:	ncurses-devel >= 5.0
 %if %{with static}
+BuildRequires:	glibc-static
 BuildRequires:	ncurses-static
 %endif
 Requires(post,preun):	grep
@@ -97,14 +95,13 @@ dosya adЩ tamamlama ve ЧЩk komut imleri gibi Жzellikler sunar.
 Це покращена верс╕я csh (the C shell) з додатковими можливостями,
 такими як ╕стор╕я команд, завершення ╕мен файл╕в ╕ т.╕.
 
-%if %{with static}
 %package static
 Summary:	Statically linked Enhanced c-shell
 Summary(pl):	Skonsolidowana statycznie zaawansowana powЁoka C
 Group:		Applications/Shells
 Requires(post,preun):	grep
 Requires(preun):	fileutils
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description static
 'tcsh' is an enhanced version of csh (the C shell), with additional
@@ -118,7 +115,6 @@ Tcsh jest zaawansowan╠ wersj╠ powЁoki csh (C-shell), z rС©norodnymi
 udogodnieniami takimi jak historia komend itp.
 
 W tym pakiecie jest statycznie skonsolidowany tcsh.
-%endif 
 
 %prep
 %setup 	-q
@@ -126,7 +122,7 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 %patch1 -p1
 %patch2 -p0
 %patch3	-p1
-%{!?_with_working_history: %{__patch} -p1 -s < %{PATCH4} }
+%{?with_working_history:%{__patch} -p1 -s < %{PATCH4}}
 %patch5	-p1
 %patch6	-p1
 %patch7	-p1
@@ -143,16 +139,20 @@ cp /usr/share/automake/config.sub .
 %{__autoconf}
 %configure
 %if %{with static}
-%{__make} LDFLAGS="-static %{rpmldflags}" LIBES="-ltinfo -lcrypt"
+%{__make} \
+	LDFLAGS="-static %{rpmldflags}" \
+	LIBES="-ltinfo -lcrypt"
 mv -f tcsh tcsh.static
 %endif
-%{__make} LDFLAGS="%{rpmldflags}" LIBES="-ltinfo -lcrypt"
+%{__make} \
+	LDFLAGS="%{rpmldflags}" \
+	LIBES="-ltinfo -lcrypt"
 
 %{__make} -C nls
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/skel,%{_mandir}/man1,%{_bindir}} \
+install -d $RPM_BUILD_ROOT{/etc/skel,%{_mandir}/man1,%{_bindir}} \
 	$RPM_BUILD_ROOT%{_datadir}/locale/{el,es,fr,it,ja}
 
 %if %{with static}
@@ -205,14 +205,12 @@ if [ "$1" = "0" ]; then
 	mv -f /etc/shells.new /etc/shells
 fi
 
-%if %{with static}
 %preun static
 umask 022
 if [ "$1" = "0" ]; then
 	grep -v '^%{_bindir}/tcsh\.static$' /etc/shells > /etc/shells.new
 	mv -f /etc/shells.new /etc/shells
 fi
-%endif
 
 %files
 %defattr(644,root,root,755)
