@@ -5,7 +5,7 @@ Summary(pl):	Zaawansowany C-shell
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
 Version:	6.10.02
-Release:	1
+Release:	2
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.fujitsu.co.jp/pub/misc/shells/tcsh/%{name}-%{version}.tgz
@@ -102,7 +102,7 @@ mv -f tcsh tcsh.static
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/skel,%{_mandir}/man1,%{_bindir}} \
-	$RPM_BUILD_ROOT%{_datadir}/locale/{fr,it,ja,gr,es}
+	$RPM_BUILD_ROOT%{_datadir}/locale/{el,es,fr,it,ja}
 
 install tcsh tcsh.static $RPM_BUILD_ROOT%{_bindir}
 
@@ -118,7 +118,7 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/skel/.login
 install tcsh.french.cat $RPM_BUILD_ROOT%{_datadir}/locale/fr/tcsh
 install tcsh.italian.cat $RPM_BUILD_ROOT%{_datadir}/locale/it/tcsh
 install tcsh.ja.cat $RPM_BUILD_ROOT%{_datadir}/locale/ja/tcsh
-install tcsh.greek.cat $RPM_BUILD_ROOT%{_datadir}/locale/gr/tcsh
+install tcsh.greek.cat $RPM_BUILD_ROOT%{_datadir}/locale/el/tcsh
 install tcsh.spanish.cat $RPM_BUILD_ROOT%{_datadir}/locale/es/tcsh
 
 gzip -9nf NewThings FAQ eight-bit.txt complete.tcsh
@@ -166,7 +166,7 @@ fi
 %lang(fr) %{_datadir}/locale/fr/tcsh
 %lang(it) %{_datadir}/locale/it/tcsh
 %lang(ja) %{_datadir}/locale/ja/tcsh
-%lang(gr) %{_datadir}/locale/gr/tcsh
+%lang(el) %{_datadir}/locale/el/tcsh
 %lang(es) %{_datadir}/locale/es/tcsh
 %{_mandir}/man1/*
 
