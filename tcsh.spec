@@ -1,3 +1,10 @@
+
+# Conditional build
+#
+# _with_working_history - compiles tcsh with timestamps in ~/.history file so
+#                         it serves any real purpose (which is not the case
+#                         for default PLD tcsh)
+
 Summary:	Enhanced c-shell
 Summary(de):	Erweiterte C-Shell
 Summary(fr):	Shell C amélioré
@@ -15,7 +22,7 @@ Patch0:		%{name}-utmp.patch
 Patch1:		%{name}-misc.patch
 Patch2:		%{name}-fhs.patch
 Patch3:		%{name}-termios.patch
-Patch4:		%{name}-no-timestamp-history.patch
+%{!?_with_working_history:Patch4: %{name}-no-timestamp-history.patch}
 Patch5:		%{name}-no_stat_utmp.patch
 Patch6:		%{name}-locale.patch
 Patch7:		%{name}-time.patch
@@ -81,7 +88,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch1 -p1
 %patch2 -p1
 %patch3	-p1
-%patch4	-p1
+%{!?_with_working_history: %patch4	-p1}
 %patch5	-p1
 %patch6	-p1
 %patch7	-p1
