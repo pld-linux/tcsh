@@ -1,0 +1,311 @@
+--- tcsh-6.08.01.orig/nls/C/set14
++++ tcsh-6.08.01/nls/C/set14
+@@ -2,5 +2,5 @@
+ $ sh.file.c
+ $set 14 
+ 1 \nYikes!! Too many %s!!\n
+-3 names in password file
++2 names in password file
+ 3 files
+--- tcsh-6.08.01.orig/nls/Makefile
++++ tcsh-6.08.01/nls/Makefile
+@@ -1,7 +1,7 @@
+ 
+ SUBDIRS=	C german french italian ja greek spanish
+ #GENCAT=	gencat -new
+-GENCAT=		gencat
++GENCAT=		gencat --new
+ 
+ catalogs:
+ 	@for i in ${SUBDIRS} ; \
+--- tcsh-6.08.01.orig/nls/greek/set14
++++ tcsh-6.08.01/nls/greek/set14
+@@ -2,5 +2,5 @@
+ $ sh.file.c
+ $set 14 
+ 1 \nΠφφφ!! Υπερβολικά πολλά %s!!\n
+-3 ονόματα στο password file
++2 ονόματα στο password file
+ 3 αρχεία
+--- tcsh-6.08.01.orig/Makefile.in
++++ tcsh-6.08.01/Makefile.in
+@@ -136,7 +136,8 @@
+ #DFLAGS=
+ #DFLAGS=-D_PATH_TCSHELL='"${DESTBIN}/tcsh"'
+ ## The following is set by autoconf.
+-DFLAGS = -D_PATH_TCSHELL='"${DESTBIN}/tcsh"' @DFLAGS@ @CPPFLAGS@
++# DFLAGS = -D_PATH_TCSHELL='"${DESTBIN}/tcsh"'
++DFLAGS =	@DFLAGS@ @CPPFLAGS@
+ 
+ 
+ ################################################################
+--- tcsh-6.08.01.orig/config_f.h
++++ tcsh-6.08.01/config_f.h
+@@ -65,7 +65,7 @@
+  *		if you don't have <nl_types.h>, you don't want
+  *		to define this.
+  */
+-#undef NLS_CATALOGS
++#define NLS_CATALOGS
+ 
+ /*
+  * LOGINFIRST   Source ~/.login before ~/.cshrc
+@@ -80,7 +80,7 @@
+ /*
+  * KAI          use "bye" command and rename "log" to "watchlog"
+  */
+-#undef KAI
++#define KAI
+ 
+ /*
+  * TESLA	drops DTR on logout. Historical note:
+@@ -92,12 +92,12 @@
+ /*
+  * DOTLAST      put "." last in the default path, for security reasons
+  */
+-#define DOTLAST
++#undef DOTLAST
+ 
+ /*
+  * NODOT	Don't put "." in the default path, for security reasons
+  */
+-#undef NODOT
++#define NODOT
+ 
+ /*
+  * AUTOLOGOUT	tries to determine if it should set autologout depending
+@@ -136,7 +136,7 @@
+ /*
+  * NEWGRP	Provide a newgrp builtin.
+  */
+-#undef NEWGRP
++#define NEWGRP
+ 
+ /*
+  * SYSMALLOC	Use the system provided version of malloc and friends.
+--- tcsh-6.08.01.orig/configure
++++ tcsh-6.08.01/configure
+@@ -601,6 +601,11 @@
+     tcsh_config_file=superux8
+   ;;
+ 
++  ## Linux Alpha
++  alpha-*-linux* )
++    tcsh_config_file=lnx-alpha
++  ;;
++
+   ## Linux
+   *-*-linux* )
+     tcsh_config_file=linux
+--- tcsh-6.08.01.orig/ed.h
++++ tcsh-6.08.01/ed.h
+@@ -53,6 +53,20 @@
+ 
+ extern int errno;
+ 
++/* Added because <termios.h> lacks the declaration but <asm/termios.h> */
++/* has too much in it that conflicts				       */
++
++#ifdef LINUXALPHA
++struct ltchars {
++	char t_suspc;
++	char t_dsuspc;
++	char t_rprntc;
++	char t_flushc;
++	char t_werasc;
++	char t_lnextc;
++};
++#endif /* LINUXALPHA */
++
+ /****************************************************************************/
+ /* stuff for the different states returned by the character editor routines */
+ /****************************************************************************/
+--- tcsh-6.08.01.orig/sh.func.c
++++ tcsh-6.08.01/sh.func.c
+@@ -1229,7 +1229,7 @@
+     Char *var;
+ {
+     static Char *locale_vars[] = {
+-	STRLANG,	STRLC_CTYPE,	STRLC_NUMERIC,	STRLC_TIME,
++	STRLANG,	STRLC_ALL, STRLC_CTYPE,	STRLC_NUMERIC,	STRLC_TIME,
+ 	STRLC_COLLATE,	STRLC_MESSAGES,	STRLC_MONETARY, 0
+     };
+     register Char **v;
+--- tcsh-6.08.01.orig/config/lnx-alpha
++++ tcsh-6.08.01/config/lnx-alpha
+@@ -0,0 +1,143 @@
++/*
++ * config.h -- configure various defines for tcsh
++ *
++ * All source files should #include this FIRST.
++ *
++ * This is the config file for Linux systems
++ */
++
++#ifndef _h_config
++#define _h_config
++/****************** System dependant compilation flags ****************/
++/*
++ * LINUXALPHA	This system is a DEC Alpha running Debian Linux.
++ */
++#define LINUXALPHA
++
++/*
++ * POSIX	This system supports IEEE Std 1003.1-1988 (POSIX).
++ */
++#define POSIX
++
++/*
++ * POSIXJOBS	This system supports the optional IEEE Std 1003.1-1988 (POSIX)
++ *		job control facilities.
++ */
++#define POSIXJOBS
++
++/*
++ * POSIXSIGS	Use the POSIX signal facilities to emulate BSD signals.
++ */
++#undef POSIXSIGS
++
++/*
++ * VFORK	This machine has a vfork().  
++ *		It used to be that for job control to work, this define
++ *		was mandatory. This is not the case any more.
++ *		If you think you still need it, but you don't have vfork, 
++ *		define this anyway and then do #define vfork fork.  
++ *		I do this anyway on a Sun because of yellow pages brain damage,
++ *		[should not be needed under 4.1]
++ *		and on the iris4d cause	SGI's fork is sufficiently "virtual" 
++ *		that vfork isn't necessary.  (Besides, SGI's vfork is weird).
++ *		Note that some machines eg. rs6000 have a vfork, but not
++ *		with the berkeley semantics, so we cannot use it there either.
++ */
++#undef VFORK
++
++/*
++ * BSDJOBS	You have BSD-style job control (both process groups and
++ *		a tty that deals correctly
++ */
++#define BSDJOBS
++
++/*
++ * BSDSIGS	You have 4.2-style signals, rather than USG style.
++ *		Note: POSIX systems should not define this unless they
++ *		have sigvec() and friends (ie: 4.3BSD-RENO, HP-UX).
++ */
++#define BSDSIGS
++
++/*
++ * BSDTIMES	You have BSD-style process time stuff (like rusage)
++ *		This may or may not be true.  For example, Apple Unix
++ *		(OREO) has BSDJOBS and BSDSIGS but not BSDTIMES.
++ */
++#define BSDTIMES
++
++/*
++ * BSDLIMIT	You have BSD-style resource limit stuff (getrlimit/setrlimit)
++ */
++#define BSDLIMIT
++
++/*
++ * BSDNICE	Your system uses setpriority() instead of nice, to
++ *		change a processes scheduling priority
++ */
++#define BSDNICE
++
++/*
++ * TERMIO	You have struct termio instead of struct sgttyb.
++ * 		This is usually the case for SVID systems, where
++ *		BSD uses sgttyb. POSIX systems should define this
++ *		anyway, even though they use struct termios.
++ */
++#undef TERMIO
++
++/*
++ * SYSVREL	Your machine is SYSV based (HPUX, A/UX)
++ *		NOTE: don't do this if you are on a Pyramid -- tcsh is
++ *		built in a BSD universe.
++ *		Set SYSVREL to 1, 2, 3, or 4, depending the version of System V
++ *		you are running. Or set it to 0 if you are not SYSV based
++ *
++ *		Note: Linux should work with any SYSVREL < 3.
++ */
++#define SYSVREL	0
++
++/*
++ * YPBUGS	Work around Sun YP bugs that cause expansion of ~username
++ *		to send command output to /dev/null
++ */
++#undef YPBUGS
++
++/*
++ * SIGVOID	Define this if your signal handlers return void.  On older
++ *		systems, signal returns int, but on newer ones, it returns void.
++ */
++#define SIGVOID 
++
++/*
++ * HAVEDUP2	Define this if your system supports dup2().
++ */
++#define HAVEDUP2
++
++/*
++ * UTHOST	Does the utmp file have a host field?
++ */
++#define UTHOST
++
++/*
++ * DIRENT	Your system has <dirent.h> instead of <sys/dir.h>
++ */
++#define DIRENT
++/****************** local defines *********************/
++
++#undef PW_SHADOW
++#define _PATH_TCSHELL "/bin/tcsh"
++#define ECHO_STYLE      BOTH_ECHO
++#ifdef BSDSIGS
++# define __USE_BSD_SIGNAL
++#endif
++
++/****************** configurable hacks ****************/
++/* have been moved to config_f.h */
++#include "config_f.h"
++
++/* that gives too long startup delays for me */
++
++#undef REMOTEHOST
++
++#define NLS_CATALOGS
++
++#endif /* _h_config */
+--- tcsh-6.08.01.orig/tc.const.c
++++ tcsh-6.08.01/tc.const.c
+@@ -340,6 +340,7 @@
+ Char STRshlvl[]		= { 's', 'h', 'l', 'v', 'l', '\0' };
+ Char STRKSHLVL[]	= { 'S', 'H', 'L', 'V', 'L', '\0' };
+ Char STRLANG[]		= { 'L', 'A', 'N', 'G', '\0' };
++Char STRLC_ALL[]	= { 'L', 'C', '_', 'A', 'L', 'L','\0' };
+ Char STRLC_CTYPE[]	= { 'L', 'C', '_', 'C', 'T', 'Y', 'P', 'E' ,'\0' };
+ Char STRLC_NUMERIC[]	= { 'L', 'C', '_', 'N', 'U', 'M', 'E', 'R', 'I',
+ 			    'C', '\0' };
+--- tcsh-6.08.01.orig/tc.os.h
++++ tcsh-6.08.01/tc.os.h
+@@ -529,7 +529,7 @@
+ 
+ #if !defined(BSD4_4) && !defined(__linux__) && !defined(__hpux) && !defined(sgi)
+ #ifndef NEEDgethostname
+-extern int gethostname __P((char *, int));
++extern int gethostname __P((char *, size_t));
+ #endif /* NEEDgethostname */
+ #endif /* !BDS4_4 && !__linux__ && !__hpux && !sgi */
+ 
+--- tcsh-6.08.01.orig/tcsh.man
++++ tcsh-6.08.01/tcsh.man
+@@ -560,7 +560,7 @@
+ changes to the next previous word etc., skipping identical matches
+ much like \fIhistory-search-backward\fR does.
+ .TP 8
+-.B delete-char \fR(not bound)
++.B delete-char \fR(bound to `Del' if using the standard \fI/etc/csh.cshrc\fR)
+ Deletes the character under the cursor.
+ See also \fIdelete-char-or-list-or-eof\fR.
+ .TP 8

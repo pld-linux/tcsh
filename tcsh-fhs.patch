@@ -1,0 +1,48 @@
+--- tcsh-6.08.01/complete.tcsh	Tue Jul  7 14:06:10 1998
++++ tcsh-6.08.01.pld/complete.tcsh	Fri May 28 08:19:40 1999
+@@ -398,8 +398,9 @@
+     # these from Tom Warzeka <waz@quahog.npt.nuwc.navy.mil>
+     # you may need to set the following variables for your host
+     set _elispdir = /usr/local/share/emacs/20.2/lisp # GNU Emacs lisp directory
+-    set _maildir = /var/spool/mail  # Post Office: /var/spool/mail or /usr/mail
++    set _maildir = /var/mail  # Post Office: /var/spool/mail or /usr/mail
+     set _ypdir  = /var/yp	# directory where NIS (YP) maps are kept
++    set _nisdir  = /var/nis	# directory where NIS+  maps are kept
+     set _domain = "`domainname`"
+ 
+     # this one works but is slow and doesn't descend into subdirectories
+@@ -424,20 +425,20 @@
+ 			n@-u@T:$_maildir@ n/-f/f/ n/*/u/
+     endif
+ 
+-    complete man	    n@1@'`\ls -1 /usr/man/man1 | sed s%\\.1.\*\$%%`'@ \
+-			    n@2@'`\ls -1 /usr/man/man2 | sed s%\\.2.\*\$%%`'@ \
+-			    n@3@'`\ls -1 /usr/man/man3 | sed s%\\.3.\*\$%%`'@ \
+-			    n@4@'`\ls -1 /usr/man/man4 | sed s%\\.4.\*\$%%`'@ \
+-			    n@5@'`\ls -1 /usr/man/man5 | sed s%\\.5.\*\$%%`'@ \
+-			    n@6@'`\ls -1 /usr/man/man6 | sed s%\\.6.\*\$%%`'@ \
+-			    n@7@'`\ls -1 /usr/man/man7 | sed s%\\.7.\*\$%%`'@ \
+-			    n@8@'`\ls -1 /usr/man/man8 | sed s%\\.8.\*\$%%`'@ \
+-    n@9@'`[ -r /usr/man/man9 ] && \ls -1 /usr/man/man9 | sed s%\\.9.\*\$%%`'@ \
+-    n@0@'`[ -r /usr/man/man0 ] && \ls -1 /usr/man/man0 | sed s%\\.0.\*\$%%`'@ \
+-  n@new@'`[ -r /usr/man/mann ] && \ls -1 /usr/man/mann | sed s%\\.n.\*\$%%`'@ \
+-  n@old@'`[ -r /usr/man/mano ] && \ls -1 /usr/man/mano | sed s%\\.o.\*\$%%`'@ \
+-n@local@'`[ -r /usr/man/manl ] && \ls -1 /usr/man/manl | sed s%\\.l.\*\$%%`'@ \
+-n@public@'`[ -r /usr/man/manp ]&& \ls -1 /usr/man/manp | sed s%\\.p.\*\$%%`'@ \
++    complete man	    n@1@'`\ls -1 /usr/share/man/man1 | sed s%\\.1.\*\$%%`'@ \
++			    n@2@'`\ls -1 /usr/share/man/man2 | sed s%\\.2.\*\$%%`'@ \
++			    n@3@'`\ls -1 /usr/share/man/man3 | sed s%\\.3.\*\$%%`'@ \
++			    n@4@'`\ls -1 /usr/share/man/man4 | sed s%\\.4.\*\$%%`'@ \
++			    n@5@'`\ls -1 /usr/share/man/man5 | sed s%\\.5.\*\$%%`'@ \
++			    n@6@'`\ls -1 /usr/share/man/man6 | sed s%\\.6.\*\$%%`'@ \
++			    n@7@'`\ls -1 /usr/share/man/man7 | sed s%\\.7.\*\$%%`'@ \
++			    n@8@'`\ls -1 /usr/share/man/man8 | sed s%\\.8.\*\$%%`'@ \
++    n@9@'`[ -r /usr/share/man/man9 ] && \ls -1 /usr/share/man/man9 | sed s%\\.9.\*\$%%`'@ \
++    n@0@'`[ -r /usr/share/man/man0 ] && \ls -1 /usr/share/man/man0 | sed s%\\.0.\*\$%%`'@ \
++  n@new@'`[ -r /usr/share/man/mann ] && \ls -1 /usr/share/man/mann | sed s%\\.n.\*\$%%`'@ \
++  n@old@'`[ -r /usr/share/man/mano ] && \ls -1 /usr/share/man/mano | sed s%\\.o.\*\$%%`'@ \
++n@local@'`[ -r /usr/share/man/manl ] && \ls -1 /usr/share/man/manl | sed s%\\.l.\*\$%%`'@ \
++n@public@'`[ -r /usr/share/man/manp ]&& \ls -1 /usr/share/man/manp | sed s%\\.p.\*\$%%`'@ \
+ 		c/-/"(- f k P s t)"/ n/-f/c/ n/-k/x:'<keyword>'/ n/-P/d/ \
+ 		N@-P@'`\ls -1 $:-1/man? | sed s%\\..\*\$%%`'@ n/*/c/
+ 

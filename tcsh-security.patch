@@ -1,0 +1,14 @@
+--- tcsh-6.07.02/sh.dir.c.security	Sat Jun 22 17:44:28 1996
++++ tcsh-6.07.02/sh.dir.c	Fri Oct  2 13:24:13 1998
+@@ -1250,7 +1255,10 @@
+ 		return (0);
+ 	}
+     }
+-    (void) Strcpy(s, dp->di_name);
++
++    (void) Strncpy(s, dp->di_name, MAXPATHLEN);
++    /* WTA: assume MAXPATHLEN is okay */
++    s[MAXPATHLEN-1]=0;
+     return (1);
+ }
+ 
