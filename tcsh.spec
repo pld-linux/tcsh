@@ -6,7 +6,7 @@ Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
 Version:	6.10.02
 Release:	1
-License:	Distributable
+License:	distributable
 Group:		Applications/Shells
 Group(de):	Applikationen/Shells
 Group(pl):	Aplikacje/Pow³oki
