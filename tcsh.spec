@@ -57,10 +57,10 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{bin,etc,usr/man/man1}
 
 install -s tcsh $RPM_BUILD_ROOT/bin/tcsh
-install tcsh.man $RPM_BUILD_ROOT/usr/man/man1/tcsh.1
+install tcsh.man $RPM_BUILD_ROOT%{_mandir}/man1/tcsh.1
 
 ln -sf tcsh $RPM_BUILD_ROOT/bin/csh
-echo .so tcsh.1 > $RPM_BUILD_ROOT/usr/man/man1/csh.1
+echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
 
 nroff -me eight-bit.me > eight-bit.txt
 
@@ -89,7 +89,7 @@ fi
 %doc NewThings FAQ eight-bit.txt complete.tcsh
 /etc/csh.cshrc
 %attr(755, root, root) /bin/*
-%attr(644, root,  man) /usr/man/man1/*
+%attr(644, root,  man) %{_mandir}/man1/*
 
 %changelog
 * Mon Nov 16 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
