@@ -26,11 +26,14 @@ foreach i ( /etc/env.d/* )
 		# nothing
 		breaksw
 	  default:
-		test `cat $i | grep -v "^#" |head -n 1`
+		grep -v "^#" $i | head -n 1 > /dev/null
 		if ($status == 0) then
-		set j = `cat $i | grep -v "^#" |head -n 1`
-			eval set $j
-			setenv $NAME "$$NAME"
+			set backslash_quote
+			set j = `grep -v "^#" $i |head -n 1`
+			eval set "$j"
+			# FIXME: how to retrieve something like $$NAME ??
+			# This is not working
+			setenv $NAME "$NAME"
 		endif
 		breaksw
 	endsw
