@@ -4,14 +4,12 @@ Summary(fr):	Shell C amélioré
 Summary(pl):	Zaawansowany C-shell
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
-%define		ver	6.10
-%define		sub_ver	00
-Version:	%{ver}.%{sub_ver}
+Version:	6.10.01
 Release:	6
 License:	Distributable
 Group:		Shells
 Group(pl):	Pow³oki
-Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{ver}.tar.gz
+Source0:	ftp://ftp.fujitsu.co.jp/pub/misc/shells/tcsh/%{name}-%{version}.tgz
 Source1:	csh.cshrc
 Source2:	%{name}-skel-.login
 Patch0:		%{name}-utmp.patch
@@ -90,7 +88,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch7	-p1
 %patch8	-p1
 %patch9	-p1
-%patch10	-p1
+%patch10 -p1
 
 %build
 autoconf
