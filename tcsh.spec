@@ -5,9 +5,10 @@ Summary(pl):	Zaawansowany C-shell -- wprawdzie nie tak jak bash ale ... ;)
 Summary(tr):	Geliþmiþ c-kabuðu (c-shell)
 Name:		tcsh
 Version:	6.08.01
-Release:	1
+Release:	2
 Copyright:	distributable
 Group:		Shells
+Group(pl):	Pow³oki
 Source0:	ftp://ftp.ee.cornell.edu/pub/tcsh/%{name}-%{version}.tar.gz
 Source1:	csh.cshrc
 Patch0:		%{name}-utmp.patch
@@ -41,6 +42,25 @@ la complétion des noms de fichiers, et des prompts sympas.
 tcsh, csh'in (C kabuðu) geliþkin bir sürümüdür ve komut tarihçesi, dosya adý
 tamamlama ve þýk komut imleri gibi özellikler sunar.
 
+%package static
+Summary:	Statcly linked Enhanced c-shell
+Summary(pl):	Statycznie zlinkowany Zaawansowany C-shell
+Group:		Shells
+Group(pl):	Pow³oki
+Requires:	%{name}
+
+%description static
+'tcsh' is an enhanced version of csh (the C shell), with additional features
+such as command history, filename completion, and fancier prompts.
+
+This packege contains staticly linked version of tcsh.
+
+%description static -l pl
+Tcsh jest zaawansowanym wersj± shella csh (C-shell), z ró¿norodnymi 
+udogodnieniami takimi jak historia komend itp.
+
+W tym pakiecie jest statycznie zlinkowany tcsh.
+
 %prep
 %setup 	-q -n %{name}-%{version}
 %patch0 -p1 
@@ -56,13 +76,16 @@ CFLAGS=$RPM_OPT_FLAGS \
     --datadir=%{_datadir} \
     %{_target_platform}
 
-make 
+make LDFLAGS="-static" LIBES="-lncurses -lcrypt"
+mv tcsh tcsh.static
+make LIBES="-lncurses -lcrypt"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{etc,%{_mandir}/man1,bin}
 install -s tcsh $RPM_BUILD_ROOT/bin/tcsh
+install -s tcsh.static $RPM_BUILD_ROOT/bin/tcsh.static
 
 install tcsh.man $RPM_BUILD_ROOT%{_mandir}/man1/tcsh.1
 echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
@@ -84,9 +107,22 @@ else
 	grep '^/bin/csh$' /etc/shells > /dev/null || echo "/bin/csh" >> /etc/shells
 fi
 
+%post static
+if [ ! -f /etc/shells ]; then
+	echo "/bin/tcsh.static" > /etc/shells
+else
+	grep '^/bin/tcsh.static$' /etc/shells > /dev/null || echo "/bin/tcsh.static" >> /etc/shells
+fi
+
 %postun
 if [ ! -x /bin/tcsh ]; then
 	grep -v '^/bin/tcsh$' /etc/shells | grep -v '^/bin/csh$'> /etc/shells.rpm
+	mv /etc/shells.rpm /etc/shells
+fi
+
+%postun static
+if [ ! -x /bin/tcsh.static ]; then
+	grep -v '^/bin/tcsh.static$' /etc/shells > /etc/shells.rpm
 	mv /etc/shells.rpm /etc/shells
 fi
 
@@ -95,13 +131,22 @@ fi
 %doc {NewThings,FAQ,eight-bit.txt,complete.tcsh}.gz
 
 /etc/csh.*
-%attr(755,root,root) /bin/*
+%attr(755,root,root) /bin/csh
+%attr(755,root,root) /bin/tcsh
 %{_mandir}/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%files static
+%defattr(644,root,root,755)
+%attr(755,root,root) /bin/tcsh.static
+
 %changelog
+* Sat Jun  5 1999 Jan Rêkorajski <baggins@pld.org.pl>
+  [6.07.09-2]
+- added static subpackage
+
 * Sun Nov 08 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
 		  Tomek K³oczko <k³oczek@pld.org.pl>	
   [6.07.09-1d]
