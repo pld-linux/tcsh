@@ -121,7 +121,7 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch7	-p1
 %patch8	-p1
 %patch9 -p1
-%patch11 -p1
+%patch10 -p1
 
 %build
 %{__aclocal}
