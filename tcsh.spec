@@ -30,9 +30,9 @@ Patch4:		%{name}-no-timestamp-history.patch
 Patch5:		%{name}-no_stat_utmp.patch
 Patch6:		%{name}-locale.patch
 Patch7:		%{name}-time.patch
-Patch9:		%{name}-rlimit_locks.patch
-Patch10:	%{name}-dspmbyte.patch
-Patch11:	%{name}-no_TERMCAP.patch
+Patch8:		%{name}-rlimit_locks.patch
+Patch9:		%{name}-dspmbyte.patch
+Patch10:	%{name}-no_TERMCAP.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	glibc-static
@@ -119,8 +119,8 @@ W tym pakiecie jest statycznie zlinkowany tcsh.
 %patch5	-p1
 %patch6	-p1
 %patch7	-p1
-%patch9	-p1
-%patch10 -p1
+%patch8	-p1
+%patch9 -p1
 %patch11 -p1
 
 %build
