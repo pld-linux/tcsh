@@ -17,7 +17,7 @@ Summary(tr):	GeliЧmiЧ c-kabuПu (c-shell)
 Summary(uk):	Покращена верся csh
 Name:		tcsh
 Version:	6.13.00
-Release:	2
+Release:	3
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
@@ -35,6 +35,7 @@ Patch6:		%{name}-rlimit_locks.patch
 Patch7:		%{name}-dspmbyte.patch
 Patch8:		%{name}-no_TERMCAP.patch
 Patch9:		%{name}-nls-codesets.patch
+Patch10:	%{name}-sysmalloc.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	groff
@@ -127,6 +128,7 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 %build
 cp /usr/share/automake/config.sub .
