@@ -1,0 +1,14 @@
+--- tcsh-6.13.00/config/linux~	2001-04-25 23:55:50.000000000 +0000
++++ tcsh-6.13.00/config/linux	2005-04-17 00:30:47.129774424 +0000
+@@ -151,6 +151,11 @@
+ /* have been moved to config_f.h */
+ #include "config_f.h"
+ 
++#ifndef SYSMALLOC
++#define SYSMALLOC
++#endif
++
++
+ #define NLS_CATALOGS
+ 
+ #endif /* _h_config */
