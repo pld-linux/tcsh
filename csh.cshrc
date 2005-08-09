@@ -15,10 +15,11 @@ test -d /etc/shrc.d
 if ($status == 0) then
 	set nonomatch
         foreach i ( /etc/shrc.d/*.csh )
-		test -f $i
-		if ($status == 0) then
-               		source $i
-		endif
+			test -f $i
+			if ($status == 0) then
+           		source $i
+			endif
         end
+		unset i
 	unset nonomatch
 endif

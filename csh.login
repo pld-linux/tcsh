@@ -52,4 +52,5 @@ foreach i ( /etc/profile.d/*.csh )
 		source $i
 	endif
 end
+unset i
 unset nonomatch
