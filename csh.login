@@ -19,19 +19,18 @@ set autoexpand
 set autolist
 
 # Key bindings
-bindkey "^R" i-search-back        # i-search
-
+bindkey "^R" i-search-back	# i-search
 
 foreach i ( /etc/env.d/* )
 	set NAME=`basename $i`
 	switch ( $NAME )
-	  case *~:
-	  case *.bak:
-	  case *.rpmnew:
-	  case *.rpmsave:
+	case *~:
+	case *.bak:
+	case *.rpmnew:
+	case *.rpmsave:
 		# nothing
 		breaksw
-	  default:
+	default:
 		grep -v "^#" $i | head -n 1 > /dev/null
 		if ($status == 0) then
 			set backslash_quote
