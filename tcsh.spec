@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with working_history	# compiles tcsh with timestamps in
+%bcond_with	working_history	# compiles tcsh with timestamps in
 				# ~/.history file so it serves any real purpose (which
 				# is not the case for default PLD tcsh)
 %bcond_without	static		# don't build static version
