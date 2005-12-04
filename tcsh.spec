@@ -211,8 +211,8 @@ fi
 %defattr(644,root,root,755)
 %doc NewThings FAQ eight-bit.txt complete.tcsh
 
-%config(noreplace,missingok) %verify(not md5 size mtime) %{_sysconfdir}/csh.*
-%config(noreplace,missingok) %verify(not md5 size mtime) /etc/skel/.login
+%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/csh.*
+%config(noreplace,missingok) %verify(not md5 mtime size) /etc/skel/.login
 
 %attr(755,root,root) %{_bindir}/csh
 %attr(755,root,root) %{_bindir}/tcsh
