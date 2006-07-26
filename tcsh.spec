@@ -36,6 +36,7 @@ Patch7:		%{name}-dspmbyte.patch
 Patch8:		%{name}-no_TERMCAP.patch
 Patch9:		%{name}-nls-codesets.patch
 Patch10:	%{name}-sysmalloc.patch
+URL:		http://www.tcsh.org/Home
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	groff
