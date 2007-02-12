@@ -6,15 +6,15 @@
 %bcond_without	static		# don't build static version
 #
 Summary:	Enhanced c-shell
-Summary(de.UTF-8):   Erweiterte C-Shell
-Summary(es.UTF-8):   C-shell mejorada
-Summary(fr.UTF-8):   Shell C amélioré
-Summary(ko.UTF-8):   csh의 향상된 버전
-Summary(pl.UTF-8):   Zaawansowany C-shell
-Summary(pt_BR.UTF-8):   C-shell melhorada
-Summary(ru.UTF-8):   Улучшеная версия csh
-Summary(tr.UTF-8):   Gelişmiş c-kabuğu (c-shell)
-Summary(uk.UTF-8):   Покращена верся csh
+Summary(de.UTF-8):	Erweiterte C-Shell
+Summary(es.UTF-8):	C-shell mejorada
+Summary(fr.UTF-8):	Shell C amélioré
+Summary(ko.UTF-8):	csh의 향상된 버전
+Summary(pl.UTF-8):	Zaawansowany C-shell
+Summary(pt_BR.UTF-8):	C-shell melhorada
+Summary(ru.UTF-8):	Улучшеная версия csh
+Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
+Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
 Version:	6.13.00
 Release:	4
@@ -98,7 +98,7 @@ dosya adı tamamlama ve şık komut imleri gibi özellikler sunar.
 
 %package static
 Summary:	Statically linked Enhanced c-shell
-Summary(pl.UTF-8):   Skonsolidowana statycznie zaawansowana powłoka C
+Summary(pl.UTF-8):	Skonsolidowana statycznie zaawansowana powłoka C
 Group:		Applications/Shells
 Requires(post,preun):	grep
 Requires(preun):	fileutils
