@@ -6,15 +6,15 @@
 %bcond_without	static		# don't build static version
 #
 Summary:	Enhanced c-shell
-Summary(de):	Erweiterte C-Shell
-Summary(es):	C-shell mejorada
-Summary(fr):	Shell C amélioré
-Summary(ko):	cshÀÇ Çâ»óµÈ ¹öÀü
-Summary(pl):	Zaawansowany C-shell
-Summary(pt_BR):	C-shell melhorada
-Summary(ru):	õÌÕŞÛÅÎÁÑ ×ÅÒÓÉÑ csh
-Summary(tr):	Gelişmiş c-kabuğu (c-shell)
-Summary(uk):	ğÏËÒÁİÅÎÁ ×ÅÒÓÑ csh
+Summary(de.UTF-8):   Erweiterte C-Shell
+Summary(es.UTF-8):   C-shell mejorada
+Summary(fr.UTF-8):   Shell C amÃ©liorÃ©
+Summary(ko.UTF-8):   cshì˜ í–¥ìƒëœ ë²„ì „
+Summary(pl.UTF-8):   Zaawansowany C-shell
+Summary(pt_BR.UTF-8):   C-shell melhorada
+Summary(ru.UTF-8):   Ğ£Ğ»ÑƒÑ‡ÑˆĞµĞ½Ğ°Ñ Ğ²ĞµÑ€ÑĞ¸Ñ csh
+Summary(tr.UTF-8):   GeliÅŸmiÅŸ c-kabuÄŸu (c-shell)
+Summary(uk.UTF-8):   ĞŸĞ¾ĞºÑ€Ğ°Ñ‰ĞµĞ½Ğ° Ğ²ĞµÑ€ÑÑ csh
 Name:		tcsh
 Version:	6.13.00
 Release:	4
@@ -59,46 +59,46 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 features such as command history, filename completion, and fancier
 prompts.
 
-%description -l de
+%description -l de.UTF-8
 'tcsh' ist eine erweiterte Version von csh (der C-Shell) mit
-zusätzlichen Funktionen wie Befehlsgeschichte,
-Dateinamenvervollständigung und attraktiveren Prompts.
+zusÃ¤tzlichen Funktionen wie Befehlsgeschichte,
+DateinamenvervollstÃ¤ndigung und attraktiveren Prompts.
 
-%description -l es
-"tcsh" es una versión mejorada de la csh (C shell), con
-características adicionales como historia de los comandos, complemento
+%description -l es.UTF-8
+"tcsh" es una versiÃ³n mejorada de la csh (C shell), con
+caracterÃ­sticas adicionales como historia de los comandos, complemento
 de nombre de archivo y prompts.
 
-%description -l fr
-'tcsh' est une version améliorée de csh (le shell C), avec des
-fonctionnalités supplémentaires comme un historique des commandes, la
-complétion des noms de fichiers, et des prompts sympas.
+%description -l fr.UTF-8
+'tcsh' est une version amÃ©liorÃ©e de csh (le shell C), avec des
+fonctionnalitÃ©s supplÃ©mentaires comme un historique des commandes, la
+complÃ©tion des noms de fichiers, et des prompts sympas.
 
-%description -l pl
-Tcsh jest zaawansowan± wersj± pow³oki csh (C-shell), z ró¿norodnymi
+%description -l pl.UTF-8
+Tcsh jest zaawansowanÄ… wersjÄ… powÅ‚oki csh (C-shell), z rÃ³Å¼norodnymi
 udogodnieniami takimi jak historia komend itp.
 
-%description -l pt_BR
-"tcsh" é uma versão melhorada da csh (C shell), com características
+%description -l pt_BR.UTF-8
+"tcsh" Ã© uma versÃ£o melhorada da csh (C shell), com caracterÃ­sticas
 adicionais como history dos comandos, complemento de nome de arquivo e
 prompts.
 
-%description -l ru
-üÔÏ ÕÌÕŞÛÅÎÎÁÑ ×ÅÒÓÉÑ csh (the C shell) Ó ÄÏĞÏÌÎÉÔÅÌØÎÙÍÉ
-×ÏÚÍÏÖÎÏÓÔÑÍÉ, ÔÁËÉÍÉ ËÁË ÉÓÔÏÒÉÑ ËÏÍÍÁÎÄ, ÄÏĞÏÌÎÅÎÉÅ ÉÍÅÎ ÆÁÊÌÏ× É
-Ô.Ä.
+%description -l ru.UTF-8
+Ğ­Ñ‚Ğ¾ ÑƒĞ»ÑƒÑ‡ÑˆĞµĞ½Ğ½Ğ°Ñ Ğ²ĞµÑ€ÑĞ¸Ñ csh (the C shell) Ñ Ğ´Ğ¾Ğ¿Ğ¾Ğ»Ğ½Ğ¸Ñ‚ĞµĞ»ÑŒĞ½Ñ‹Ğ¼Ğ¸
+Ğ²Ğ¾Ğ·Ğ¼Ğ¾Ğ¶Ğ½Ğ¾ÑÑ‚ÑĞ¼Ğ¸, Ñ‚Ğ°ĞºĞ¸Ğ¼Ğ¸ ĞºĞ°Ğº Ğ¸ÑÑ‚Ğ¾Ñ€Ğ¸Ñ ĞºĞ¾Ğ¼Ğ¼Ğ°Ğ½Ğ´, Ğ´Ğ¾Ğ¿Ğ¾Ğ»Ğ½ĞµĞ½Ğ¸Ğµ Ğ¸Ğ¼ĞµĞ½ Ñ„Ğ°Ğ¹Ğ»Ğ¾Ğ² Ğ¸
+Ñ‚.Ğ´.
 
-%description -l tr
-tcsh, csh'in (C kabuğu) gelişkin bir sürümüdür ve komut tarihçesi,
-dosya adı tamamlama ve şık komut imleri gibi özellikler sunar.
+%description -l tr.UTF-8
+tcsh, csh'in (C kabuÄŸu) geliÅŸkin bir sÃ¼rÃ¼mÃ¼dÃ¼r ve komut tarihÃ§esi,
+dosya adÄ± tamamlama ve ÅŸÄ±k komut imleri gibi Ã¶zellikler sunar.
 
-%description -l uk
-ãÅ ĞÏËÒÁİÅÎÁ ×ÅÒÓ¦Ñ csh (the C shell) Ú ÄÏÄÁÔËÏ×ÉÍÉ ÍÏÖÌÉ×ÏÓÔÑÍÉ,
-ÔÁËÉÍÉ ÑË ¦ÓÔÏÒ¦Ñ ËÏÍÁÎÄ, ÚÁ×ÅÒÛÅÎÎÑ ¦ÍÅÎ ÆÁÊÌ¦× ¦ Ô.¦.
+%description -l uk.UTF-8
+Ğ¦Ğµ Ğ¿Ğ¾ĞºÑ€Ğ°Ñ‰ĞµĞ½Ğ° Ğ²ĞµÑ€ÑÑ–Ñ csh (the C shell) Ğ· Ğ´Ğ¾Ğ´Ğ°Ñ‚ĞºĞ¾Ğ²Ğ¸Ğ¼Ğ¸ Ğ¼Ğ¾Ğ¶Ğ»Ğ¸Ğ²Ğ¾ÑÑ‚ÑĞ¼Ğ¸,
+Ñ‚Ğ°ĞºĞ¸Ğ¼Ğ¸ ÑĞº Ñ–ÑÑ‚Ğ¾Ñ€Ñ–Ñ ĞºĞ¾Ğ¼Ğ°Ğ½Ğ´, Ğ·Ğ°Ğ²ĞµÑ€ÑˆĞµĞ½Ğ½Ñ Ñ–Ğ¼ĞµĞ½ Ñ„Ğ°Ğ¹Ğ»Ñ–Ğ² Ñ– Ñ‚.Ñ–.
 
 %package static
 Summary:	Statically linked Enhanced c-shell
-Summary(pl):	Skonsolidowana statycznie zaawansowana pow³oka C
+Summary(pl.UTF-8):   Skonsolidowana statycznie zaawansowana powÅ‚oka C
 Group:		Applications/Shells
 Requires(post,preun):	grep
 Requires(preun):	fileutils
@@ -111,8 +111,8 @@ prompts.
 
 This packege contains statically linked version of tcsh.
 
-%description static -l pl
-Tcsh jest zaawansowan± wersj± pow³oki csh (C-shell), z ró¿norodnymi
+%description static -l pl.UTF-8
+Tcsh jest zaawansowanÄ… wersjÄ… powÅ‚oki csh (C-shell), z rÃ³Å¼norodnymi
 udogodnieniami takimi jak historia komend itp.
 
 W tym pakiecie jest statycznie skonsolidowany tcsh.
