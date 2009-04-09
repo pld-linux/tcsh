@@ -25,14 +25,14 @@ Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
 Source1:	csh.cshrc
 Source2:	csh.login
 Source3:	%{name}-skel-.login
-Patch1:		%{name}-misc.patch
-Patch2:		%{name}-termios.patch
-Patch3:		%{name}-no-timestamp-history.patch
-Patch5:		%{name}-time.patch
-Patch6:		%{name}-rlimit_locks.patch
-Patch8:		%{name}-no_TERMCAP.patch
-Patch9:		%{name}-nls-codesets.patch
-Patch10:	%{name}-sysmalloc.patch
+Patch0:		%{name}-misc.patch
+Patch1:		%{name}-termios.patch
+Patch2:		%{name}-no-timestamp-history.patch
+Patch3:		%{name}-time.patch
+Patch4:		%{name}-rlimit_locks.patch
+Patch5:		%{name}-no_TERMCAP.patch
+Patch6:		%{name}-nls-codesets.patch
+Patch7:		%{name}-sysmalloc.patch
 URL:		http://www.tcsh.org/Home
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -116,14 +116,14 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch2	-p1
-%{!?with_working_history:%patch3 -p1}
-%patch5	-p1
-%patch6	-p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
+%patch0 -p1
+%patch1	-p1
+%{!?with_working_history:%patch2 -p1}
+%patch3	-p1
+%patch4	-p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 %build
 cp /usr/share/automake/config.sub .
