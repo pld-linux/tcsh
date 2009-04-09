@@ -16,23 +16,20 @@ Summary(ru.UTF-8):	Улучшеная версия csh
 Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
-Version:	6.13.00
-Release:	5
+Version:	6.16.00
+Release:	0.1
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
-# Source0-md5:	11c0c9c9148652dc01270c4880d1cc6e
+# Source0-md5:	55f1a41512250168ec4bf1db0e246db4
 Source1:	csh.cshrc
 Source2:	csh.login
 Source3:	%{name}-skel-.login
-Patch0:		%{name}-utmp.patch
 Patch1:		%{name}-misc.patch
 Patch2:		%{name}-termios.patch
 Patch3:		%{name}-no-timestamp-history.patch
-Patch4:		%{name}-no_stat_utmp.patch
 Patch5:		%{name}-time.patch
 Patch6:		%{name}-rlimit_locks.patch
-Patch7:		%{name}-dspmbyte.patch
 Patch8:		%{name}-no_TERMCAP.patch
 Patch9:		%{name}-nls-codesets.patch
 Patch10:	%{name}-sysmalloc.patch
@@ -119,14 +116,11 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 
 %prep
 %setup -q
-%patch0 -p1
 %patch1 -p1
 %patch2	-p1
 %{!?with_working_history:%patch3 -p1}
-%patch4	-p1
 %patch5	-p1
 %patch6	-p1
-%patch7 -p1
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
