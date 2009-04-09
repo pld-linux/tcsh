@@ -2,7 +2,7 @@ diff -Nur tcsh-6.12.00/nls.orig/et/set1 tcsh-6.12.00/nls/et/set1
 --- tcsh-6.12.00/nls.orig/et/set1	Thu Jan 11 13:25:24 2001
 +++ tcsh-6.12.00/nls/et/set1	Fri Jun  6 13:07:05 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.3 2006/03/02 18:46:45 christos Exp $
 +$ codeset=iso-8859-1
  $ Error messages
  $set 1 
@@ -11,7 +11,7 @@ diff -Nur tcsh-6.12.00/nls.orig/finnish/set1 tcsh-6.12.00/nls/finnish/set1
 --- tcsh-6.12.00/nls.orig/finnish/set1	Mon Sep  3 02:13:26 2001
 +++ tcsh-6.12.00/nls/finnish/set1	Fri Jun  6 13:07:28 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.3 2006/03/02 18:46:46 christos Exp $
 +$ codeset=iso-8859-1
  $ Error messages
  $set 1 
@@ -20,7 +20,7 @@ diff -Nur tcsh-6.12.00/nls.orig/french/set1 tcsh-6.12.00/nls/french/set1
 --- tcsh-6.12.00/nls.orig/french/set1	Sat Jun 27 12:27:57 1998
 +++ tcsh-6.12.00/nls/french/set1	Fri Jun  6 13:07:36 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.4 2006/03/02 18:46:46 christos Exp $
 +$ codeset=iso-8859-1
  $ Messages d 'erreur
  $set 1 
@@ -29,7 +29,7 @@ diff -Nur tcsh-6.12.00/nls.orig/german/set1 tcsh-6.12.00/nls/german/set1
 --- tcsh-6.12.00/nls.orig/german/set1	Sat Jun 27 12:27:59 1998
 +++ tcsh-6.12.00/nls/german/set1	Fri Jun  6 13:07:41 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.6 2006/03/02 18:46:46 christos Exp $
 +$ codeset=iso-8859-1
  $ Error messages
  $set 1
@@ -38,7 +38,7 @@ diff -Nur tcsh-6.12.00/nls.orig/greek/set1 tcsh-6.12.00/nls/greek/set1
 --- tcsh-6.12.00/nls.orig/greek/set1	Fri Sep 18 15:31:57 1998
 +++ tcsh-6.12.00/nls/greek/set1	Fri Jun  6 13:07:53 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.4 2006/03/02 18:46:46 christos Exp $
 +$ codeset=iso-8859-7
  $ Error messages
  $set 1 
@@ -47,7 +47,7 @@ diff -Nur tcsh-6.12.00/nls.orig/italian/set1 tcsh-6.12.00/nls/italian/set1
 --- tcsh-6.12.00/nls.orig/italian/set1	Thu Sep  3 22:03:13 1998
 +++ tcsh-6.12.00/nls/italian/set1	Fri Jun  6 13:08:00 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.2 2006/03/02 18:46:47 christos Exp $
 +$ codeset=iso-8859-1
  $ Error messages
  $set 1 
@@ -56,7 +56,7 @@ diff -Nur tcsh-6.12.00/nls.orig/ja/set1 tcsh-6.12.00/nls/ja/set1
 --- tcsh-6.12.00/nls.orig/ja/set1	Tue May 11 13:08:29 1999
 +++ tcsh-6.12.00/nls/ja/set1	Fri Jun  6 13:08:52 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.5 2006/03/02 18:46:47 christos Exp $
 +$ codeset=euc-jp
  $ Error messages
  $set 1 
@@ -65,7 +65,7 @@ diff -Nur tcsh-6.12.00/nls.orig/pl/set1 tcsh-6.12.00/nls/pl/set1
 --- tcsh-6.12.00/nls.orig/pl/set1	Fri Mar  8 17:42:33 2002
 +++ tcsh-6.12.00/nls/pl/set1	Fri Jun  6 13:09:01 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.5 1998/06/27 12:27:55 christos Exp $
 +$ codeset=iso-8859-2
  $ Error messages
  $set 1 
@@ -74,7 +74,7 @@ diff -Nur tcsh-6.12.00/nls.orig/russian/set1 tcsh-6.12.00/nls/russian/set1
 --- tcsh-6.12.00/nls.orig/russian/set1	Fri Mar  8 17:46:50 2002
 +++ tcsh-6.12.00/nls/russian/set1	Fri Jun  6 13:09:31 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.4 2006/03/02 18:46:47 christos Exp $
 +$ codeset=iso-8859-5
  $ Error messages
  $set 1 
@@ -83,7 +83,7 @@ diff -Nur tcsh-6.12.00/nls.orig/spanish/set1 tcsh-6.12.00/nls/spanish/set1
 --- tcsh-6.12.00/nls.orig/spanish/set1	Sat Jun 27 12:28:02 1998
 +++ tcsh-6.12.00/nls/spanish/set1	Fri Jun  6 13:09:39 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.3 2006/03/02 18:46:48 christos Exp $
 +$ codeset=iso-8859-1
  $ Mensajes de Error
  $set 1 
@@ -92,7 +92,7 @@ diff -Nur tcsh-6.12.00/nls.orig/ukrainian/set1 tcsh-6.12.00/nls/ukrainian/set1
 --- tcsh-6.12.00/nls.orig/ukrainian/set1	Mon Jul  1 20:50:22 2002
 +++ tcsh-6.12.00/nls/ukrainian/set1	Fri Jun  6 13:10:21 2003
 @@ -1,4 +1,5 @@
- $ $Id$
+ $ $tcsh: set1,v 1.3 2006/03/02 18:46:48 christos Exp $
 +$ codeset=koi8-u
  $ Error messages
  $set 1 

@@ -14,7 +14,7 @@
 @@ -2082,6 +2086,7 @@
  # endif /* BSDLIMIT */
      RLIM_TYPE limit;
-     int     div = lp->limdiv;
+     int     xdiv = lp->limdiv;
 +    int     limret;
  
      xprintf("%-13.13s", lp->limname);
