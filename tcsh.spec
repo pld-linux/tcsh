@@ -16,12 +16,12 @@ Summary(ru.UTF-8):	Улучшеная версия csh
 Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
-Version:	6.16.00
+Version:	6.17.00
 Release:	1
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
-# Source0-md5:	55f1a41512250168ec4bf1db0e246db4
+# Source0-md5:	c47de903e3d52f6824c8dd0c91eeb477
 Source1:	csh.cshrc
 Source2:	csh.login
 Source3:	%{name}-skel-.login
