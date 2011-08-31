@@ -17,7 +17,7 @@ Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
 Version:	6.17.00
-Release:	2
+Release:	3
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
@@ -133,12 +133,12 @@ cp /usr/share/automake/config.sub .
 %if %{with static}
 %{__make} \
 	LDFLAGS="-static %{rpmldflags}" \
-	LIBES="-ltinfo -lcrypt"
+	LIBES="-lncurses -lcrypt"
 mv -f tcsh tcsh.static
 %endif
 %{__make} \
 	LDFLAGS="%{rpmldflags}" \
-	LIBES="-ltinfo -lcrypt"
+	LIBES="-lncurses -lcrypt"
 
 %{__make} -C nls
 
