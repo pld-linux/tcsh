@@ -34,7 +34,7 @@ Patch5:		%{name}-no_TERMCAP.patch
 Patch6:		%{name}-nls-codesets.patch
 Patch7:		%{name}-sysmalloc.patch
 URL:		http://www.tcsh.org/Home
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	groff
 # for gencat
