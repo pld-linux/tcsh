@@ -9,25 +9,3 @@
  #ifdef _SEQUENT_
  # include <sys/procstats.h>
  #endif /* _SEQUENT_ */
-@@ -249,12 +251,10 @@
- #  else
- #   include <termio.h>
- #  endif /* _UWIN */
--#  if SYSVREL > 3
- #   undef TIOCGLTC	/* we don't need those, since POSIX has them */
- #   undef TIOCSLTC
- #   undef CSWTCH
- #   define CSWTCH _POSIX_VDISABLE	/* So job control works */
--#  endif /* SYSVREL > 3 */
- # endif /* POSIX */
- #endif /* WINNT */
- 
-@@ -312,6 +312,8 @@
- #if !((defined(SUNOS4) || defined(_MINIX) /* || defined(DECOSF1) */) && defined(TERMIO))
- # if !defined(COHERENT) && !defined(_VMS_POSIX) && !defined(WINNT)
- #  include <sys/ioctl.h>
-+#  undef TIOCGLTC	/* we don't need those, since POSIX has them */
-+#  undef TIOCSLTC
- # endif
- #endif 
- 

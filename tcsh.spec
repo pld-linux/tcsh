@@ -3,7 +3,7 @@
 %bcond_with	working_history	# compiles tcsh with timestamps in
 				# ~/.history file so it serves any real purpose (which
 				# is not the case for default PLD tcsh)
-%bcond_without	static		# don't build static version
+%bcond_with	static		# don't build static version
 #
 Summary:	Enhanced c-shell
 Summary(de.UTF-8):	Erweiterte C-Shell
@@ -16,12 +16,12 @@ Summary(ru.UTF-8):	Улучшеная версия csh
 Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
-Version:	6.17.00
-Release:	6
+Version:	6.18.01
+Release:	1
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
-# Source0-md5:	c47de903e3d52f6824c8dd0c91eeb477
+# Source0-md5:	6eed09dbd4223ab5b6955378450d228a
 Source1:	csh.cshrc
 Source2:	csh.login
 Source3:	%{name}-skel-.login
@@ -31,8 +31,6 @@ Patch2:		%{name}-no-timestamp-history.patch
 Patch3:		%{name}-time.patch
 Patch4:		%{name}-rlimit_locks.patch
 Patch5:		%{name}-no_TERMCAP.patch
-Patch6:		%{name}-nls-codesets.patch
-Patch7:		%{name}-sysmalloc.patch
 URL:		http://www.tcsh.org/Home
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -122,8 +120,6 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 %patch3	-p1
 %patch4	-p1
 %patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %build
 cp /usr/share/automake/config.sub .
@@ -144,28 +140,21 @@ mv -f tcsh tcsh.static
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/skel,%{_mandir}/man1,%{_bindir}} \
-	$RPM_BUILD_ROOT%{_datadir}/locale/{el,es,fr,it,ja}
+install -d $RPM_BUILD_ROOT/etc/skel 
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %if %{with static}
 install tcsh.static $RPM_BUILD_ROOT%{_bindir}
 %endif
-install tcsh $RPM_BUILD_ROOT%{_bindir}
 
-install tcsh.man $RPM_BUILD_ROOT%{_mandir}/man1/tcsh.1
 echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
 
 ln -sf tcsh $RPM_BUILD_ROOT%{_bindir}/csh
-nroff -me eight-bit.me > eight-bit.txt
 
 install %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/skel/.login
-
-install tcsh.french.cat $RPM_BUILD_ROOT%{_datadir}/locale/fr/tcsh
-install tcsh.italian.cat $RPM_BUILD_ROOT%{_datadir}/locale/it/tcsh
-install tcsh.ja.cat $RPM_BUILD_ROOT%{_datadir}/locale/ja/tcsh
-install tcsh.greek.cat $RPM_BUILD_ROOT%{_datadir}/locale/el/tcsh
-install tcsh.spanish.cat $RPM_BUILD_ROOT%{_datadir}/locale/es/tcsh
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -211,11 +200,17 @@ fi
 
 %attr(755,root,root) %{_bindir}/csh
 %attr(755,root,root) %{_bindir}/tcsh
-%lang(fr) %{_datadir}/locale/fr/tcsh
-%lang(it) %{_datadir}/locale/it/tcsh
-%lang(ja) %{_datadir}/locale/ja/tcsh
-%lang(el) %{_datadir}/locale/el/tcsh
-%lang(es) %{_datadir}/locale/es/tcsh
+%{_datadir}/locale/C/LC_MESSAGES/tcsh.cat
+%lang(de) %{_datadir}/locale/de/LC_MESSAGES/tcsh.cat
+%lang(es) %{_datadir}/locale/es/LC_MESSAGES/tcsh.cat
+%lang(et) %{_datadir}/locale/et/LC_MESSAGES/tcsh.cat
+%lang(fi) %{_datadir}/locale/fi/LC_MESSAGES/tcsh.cat
+%lang(fr) %{_datadir}/locale/fr/LC_MESSAGES/tcsh.cat
+%lang(gr) %{_datadir}/locale/gr/LC_MESSAGES/tcsh.cat
+%lang(it) %{_datadir}/locale/it/LC_MESSAGES/tcsh.cat
+%lang(ja) %{_datadir}/locale/ja/LC_MESSAGES/tcsh.cat
+%lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/tcsh.cat
+%lang(ru) %{_datadir}/locale/ru/LC_MESSAGES/tcsh.cat
 %{_mandir}/man1/*
 
 %if %{with static}
