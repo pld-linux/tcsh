@@ -17,7 +17,7 @@ Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
 Version:	6.18.01
-Release:	1
+Release:	2
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
@@ -148,6 +148,8 @@ install -d $RPM_BUILD_ROOT/etc/skel
 %if %{with static}
 install tcsh.static $RPM_BUILD_ROOT%{_bindir}
 %endif
+
+nroff -me eight-bit.me > eight-bit.txt
 
 echo .so tcsh.1 > $RPM_BUILD_ROOT%{_mandir}/man1/csh.1
 
