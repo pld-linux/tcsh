@@ -17,7 +17,7 @@ Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
 Version:	6.18.01
-Release:	2
+Release:	3
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
@@ -145,6 +145,8 @@ install -d $RPM_BUILD_ROOT/etc/skel
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{gr,el}
+
 %if %{with static}
 install tcsh.static $RPM_BUILD_ROOT%{_bindir}
 %endif
@@ -202,13 +204,13 @@ fi
 
 %attr(755,root,root) %{_bindir}/csh
 %attr(755,root,root) %{_bindir}/tcsh
-%{_datadir}/locale/C/LC_MESSAGES/tcsh.cat
+#%{_datadir}/locale/C/LC_MESSAGES/tcsh.cat
 %lang(de) %{_datadir}/locale/de/LC_MESSAGES/tcsh.cat
+%lang(el) %{_datadir}/locale/el/LC_MESSAGES/tcsh.cat
 %lang(es) %{_datadir}/locale/es/LC_MESSAGES/tcsh.cat
 %lang(et) %{_datadir}/locale/et/LC_MESSAGES/tcsh.cat
 %lang(fi) %{_datadir}/locale/fi/LC_MESSAGES/tcsh.cat
 %lang(fr) %{_datadir}/locale/fr/LC_MESSAGES/tcsh.cat
-%lang(gr) %{_datadir}/locale/gr/LC_MESSAGES/tcsh.cat
 %lang(it) %{_datadir}/locale/it/LC_MESSAGES/tcsh.cat
 %lang(ja) %{_datadir}/locale/ja/LC_MESSAGES/tcsh.cat
 %lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/tcsh.cat
