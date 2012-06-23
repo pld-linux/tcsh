@@ -17,7 +17,7 @@ Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
 Version:	6.18.01
-Release:	3
+Release:	4
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
@@ -145,7 +145,10 @@ install -d $RPM_BUILD_ROOT/etc/skel
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# fix lang code
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{gr,el}
+# it's Ukrainian in UTF-8, not Russian in KOI8-U
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{ru_UA.koi8u,uk}
 
 %if %{with static}
 install tcsh.static $RPM_BUILD_ROOT%{_bindir}
@@ -215,7 +218,9 @@ fi
 %lang(ja) %{_datadir}/locale/ja/LC_MESSAGES/tcsh.cat
 %lang(pl) %{_datadir}/locale/pl/LC_MESSAGES/tcsh.cat
 %lang(ru) %{_datadir}/locale/ru/LC_MESSAGES/tcsh.cat
-%{_mandir}/man1/*
+%lang(uk) %{_datadir}/locale/uk/LC_MESSAGES/tcsh.cat
+%{_mandir}/man1/csh.1*
+%{_mandir}/man1/tcsh.1*
 
 %if %{with static}
 %files static
