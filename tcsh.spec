@@ -31,6 +31,7 @@ Patch2:		%{name}-no-timestamp-history.patch
 Patch3:		%{name}-time.patch
 Patch4:		%{name}-rlimit_locks.patch
 Patch5:		%{name}-no_TERMCAP.patch
+Patch6:		%{name}-format-security.patch
 URL:		http://www.tcsh.org/Home
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -120,8 +121,10 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 %patch3	-p1
 %patch4	-p1
 %patch5 -p1
+%patch6 -p1
 
 %build
+mkdir m4
 cp /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}

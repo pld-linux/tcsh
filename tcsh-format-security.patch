@@ -1,0 +1,11 @@
+--- tcsh-6.18.01/sh.func.c.formatsec	2013-02-13 22:26:11.659476651 +0100
++++ tcsh-6.18.01/sh.func.c	2013-02-13 22:28:13.118818644 +0100
+@@ -2317,7 +2317,7 @@ setlim(struct limits *lp, int hard, RLIM
+     if (setrlimit(lp->limconst, &rlim) < 0) {
+        if ( ( lp->limconst == RLIMIT_LOCKS ) &&
+ 	    ( errno == EINVAL ) ) {
+-	       xprintf(CGETS(15, 5, "cannot set it on the current kernel\n"));
++	       xprintf("%s", CGETS(15, 5, "cannot set it on the current kernel\n"));
+ 	       return(0);
+        }
+ # else /* BSDLIMIT */
