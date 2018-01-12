@@ -1,6 +1,7 @@
---- tcsh-6.09.00/sh.h.termios	Sun Oct 25 10:10:16 1998
-+++ tcsh-6.09.00/sh.h	Mon Jan 10 15:38:40 2000
-@@ -204,6 +204,8 @@
+diff -urNpa tcsh-6.20.00.orig/sh.h tcsh-6.20.00/sh.h
+--- tcsh-6.20.00.orig/sh.h	2016-09-12 16:33:54.000000000 +0000
++++ tcsh-6.20.00/sh.h	2018-01-12 17:40:23.463110471 +0000
+@@ -255,6 +255,8 @@ typedef long tcsh_number_t;
  # define DEV_DEV_COMPARE(x,y)   ((x) == (y))
  #endif /* DEV_DEV_COMPARE */
  

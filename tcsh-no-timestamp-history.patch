@@ -1,9 +1,10 @@
---- tcsh-6.09.00/sh.hist.c~	Sat Feb  6 16:01:23 1999
-+++ tcsh-6.09.00/sh.hist.c	Mon May 29 21:59:45 2000
-@@ -396,7 +396,7 @@
-     Char    *snum;
-     int     fp, ftmp, oldidfds;
+diff -urNpa tcsh-6.20.00.orig/sh.hist.c tcsh-6.20.00/sh.hist.c
+--- tcsh-6.20.00.orig/sh.hist.c	2015-06-06 21:19:08.000000000 +0000
++++ tcsh-6.20.00/sh.hist.c	2018-01-12 17:41:58.363104815 +0000
+@@ -1227,7 +1227,7 @@ rechist(Char *fname, int ref)
      struct varent *shist;
+     char path[MAXPATHLEN];
+     struct stat st;
 -    static Char   *dumphist[] = {STRhistory, STRmhT, 0, 0};
 +    static Char   *dumphist[] = {STRhistory, STRmh, 0, 0};
  

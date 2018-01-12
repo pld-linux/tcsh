@@ -1,34 +1,39 @@
---- tcsh-6.12.00/ed.screen.c~	Sun May 18 04:50:03 2003
-+++ tcsh-6.12.00/ed.screen.c	Sun May 18 04:50:03 2003
-@@ -1681,25 +1681,6 @@
+diff -urNpa tcsh-6.20.00.orig/ed.screen.c tcsh-6.20.00/ed.screen.c
+--- tcsh-6.20.00.orig/ed.screen.c	2016-11-24 15:04:14.000000000 +0000
++++ tcsh-6.20.00/ed.screen.c	2018-01-12 17:45:57.203090579 +0000
+@@ -1623,28 +1623,6 @@ ChangeSize(int lins, int cols)
+ 	    tsetenv(STRLINES, p);
  	    cleanup_until(p);
  	}
- 
+-
 -	if ((tptr = getenv("TERMCAP")) != NULL) {
 -	    /* Leave 64 characters slop in case we enlarge the termcap string */
 -	    Char    termcap[TC_BUFSIZE+64], backup[TC_BUFSIZE+64], *ptr;
--	    Char buf[4];
+-	    int changed;
 -
 -	    ptr = str2short(tptr);
 -	    (void) Strncpy(termcap, ptr, TC_BUFSIZE);
 -	    termcap[TC_BUFSIZE-1] = '\0';
 -
--	    UpdateVal(STRco, Val(T_co), termcap, backup);
--	    UpdateVal(STRli, Val(T_li), termcap, backup);
+-	    changed = UpdateVal(STRco, Val(T_co), termcap, backup);
+-	    changed |= UpdateVal(STRli, Val(T_li), termcap, backup);
 -
--	    /*
--	     * Chop the termcap string at TC_BUFSIZE-1 characters to avoid
--	     * core-dumps in the termcap routines
--	     */
--	    termcap[TC_BUFSIZE - 1] = '\0';
--	    tsetenv(STRTERMCAP, termcap);
+-	    if (changed) {
+-		/*
+-		 * Chop the termcap string at TC_BUFSIZE-1 characters to avoid
+-		 * core-dumps in the termcap routines
+-		 */
+-		termcap[TC_BUFSIZE - 1] = '\0';
+-		tsetenv(STRTERMCAP, termcap);
+-	    }
 -	}
      }
  #endif /* KNOWsize */
  
---- tcsh-6.12.00/sh.func.c~	Sun May 18 04:53:01 2003
-+++ tcsh-6.12.00/sh.func.c	Sun May 18 04:53:01 2003
-@@ -1465,8 +1465,7 @@
+diff -urNpa tcsh-6.20.00.orig/sh.func.c tcsh-6.20.00/sh.func.c
+--- tcsh-6.20.00.orig/sh.func.c	2018-01-12 17:43:52.000000000 +0000
++++ tcsh-6.20.00/sh.func.c	2018-01-12 17:44:47.004094763 +0000
+@@ -1572,8 +1572,7 @@ dosetenv(Char **v, struct command *c)
      /*
       * Load/Update $LINES $COLUMNS
       */
@@ -38,9 +43,10 @@
  	cleanup_until(lp);
  	check_window_size(1);
  	return;
---- tcsh-6.12.00/sh.set.c~	Sun May 18 04:55:02 2003
-+++ tcsh-6.12.00/sh.set.c	Sun May 18 04:55:02 2003
-@@ -107,11 +107,6 @@
+diff -urNpa tcsh-6.20.00.orig/sh.set.c tcsh-6.20.00/sh.set.c
+--- tcsh-6.20.00.orig/sh.set.c	2015-09-08 15:49:53.000000000 +0000
++++ tcsh-6.20.00/sh.set.c	2018-01-12 17:44:47.005094763 +0000
+@@ -132,11 +132,6 @@ update_vars(Char *vp)
      else if (eq(vp, STRterm)) {
  	Char *cp = varval(vp);
  	tsetenv(STRKTERM, cp);
@@ -52,13 +58,14 @@
  	GotTermCaps = 0;
  	if (noediting && Strcmp(cp, STRnetwork) != 0 &&
  	    Strcmp(cp, STRunknown) != 0 && Strcmp(cp, STRdumb) != 0) {
---- tcsh-6.12.00/tc.const.c~	Sun May 18 04:57:51 2003
-+++ tcsh-6.12.00/tc.const.c	Sun May 18 04:57:51 2003
-@@ -424,7 +424,6 @@
+diff -urNpa tcsh-6.20.00.orig/tc.const.c tcsh-6.20.00/tc.const.c
+--- tcsh-6.20.00.orig/tc.const.c	2015-09-08 15:49:53.000000000 +0000
++++ tcsh-6.20.00/tc.const.c	2018-01-12 17:46:21.904089107 +0000
+@@ -460,7 +460,6 @@ Char STRNOREBIND[] 	= { 'N', 'O', 'R', '
  /* atp - problem with declaration of str{lines,columns} in sh.func.c (1277) */
  Char STRLINES[]		= { 'L', 'I', 'N', 'E', 'S', '\0'};
  Char STRCOLUMNS[]	= { 'C', 'O', 'L', 'U', 'M', 'N', 'S', '\0'};
 -Char STRTERMCAP[]	= { 'T', 'E', 'R', 'M', 'C', 'A', 'P', '\0'};
- #endif /* SIG_WINDOW  || _VMS_POSIX */
+ #endif /* SIG_WINDOW  || SIGWINCH || SIGWINDOW || _VMS_POSIX */
  
- #ifdef WARP
+ #if defined (_OSD_POSIX)  /* BS2000 needs this variable set to "SHELL" */

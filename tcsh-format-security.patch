@@ -1,6 +1,7 @@
---- tcsh-6.18.01/sh.func.c.formatsec	2013-02-13 22:26:11.659476651 +0100
-+++ tcsh-6.18.01/sh.func.c	2013-02-13 22:28:13.118818644 +0100
-@@ -2317,7 +2317,7 @@ setlim(struct limits *lp, int hard, RLIM
+diff -urNpa tcsh-6.20.00.orig/sh.func.c tcsh-6.20.00/sh.func.c
+--- tcsh-6.20.00.orig/sh.func.c	2018-01-12 17:44:47.000000000 +0000
++++ tcsh-6.20.00/sh.func.c	2018-01-12 17:47:14.904085948 +0000
+@@ -2358,7 +2358,7 @@ setlim(struct limits *lp, int hard, RLIM
      if (setrlimit(lp->limconst, &rlim) < 0) {
         if ( ( lp->limconst == RLIMIT_LOCKS ) &&
  	    ( errno == EINVAL ) ) {

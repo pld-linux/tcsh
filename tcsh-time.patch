@@ -1,6 +1,7 @@
---- tcsh-6.10.00/sh.h	Sun Nov 19 15:50:43 2000
-+++ tcsh-6.10.00/sh.h.new	Tue Feb  6 15:11:33 2001
-@@ -208,7 +208,7 @@
+diff -urNpa tcsh-6.20.00.orig/sh.h tcsh-6.20.00/sh.h
+--- tcsh-6.20.00.orig/sh.h	2018-01-12 17:40:23.000000000 +0000
++++ tcsh-6.20.00/sh.h	2018-01-12 17:42:56.464101352 +0000
+@@ -261,7 +261,7 @@ typedef long tcsh_number_t;
  # include <sys/procstats.h>
  #endif /* _SEQUENT_ */
  #if (defined(POSIX) || SYSVREL > 0) && !defined(WINNT_NATIVE)

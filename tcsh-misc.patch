@@ -1,19 +1,7 @@
---- tcsh-6.13.00/Makefile.in.orig	2003-03-12 20:14:50.000000000 +0100
-+++ tcsh-6.13.00/Makefile.in	2004-09-05 10:55:21.588461016 +0200
-@@ -136,8 +136,8 @@
- #DFLAGS=
- #DFLAGS=-D_PATH_TCSHELL='"${DESTBIN}/tcsh"'
- ## The following is set by autoconf.
--DFLAGS = -D_PATH_TCSHELL='"${bindir}/tcsh"' @DFLAGS@ @CPPFLAGS@
--
-+#DFLAGS = -D_PATH_TCSHELL='"${bindir}/tcsh"' @DFLAGS@ @CPPFLAGS@
-+DFLAGS = @DFLAGS@ @CPPFLAGS@
- 
- ################################################################
- ## LDFLAGS.  Define something here if you need to
---- tcsh-6.08.01.orig/config_f.h
-+++ tcsh-6.08.01/config_f.h
-@@ -80,7 +80,7 @@
+diff -urNpa tcsh-6.20.00.orig/config_f.h tcsh-6.20.00/config_f.h
+--- tcsh-6.20.00.orig/config_f.h	2016-04-16 15:44:18.000000000 +0000
++++ tcsh-6.20.00/config_f.h	2018-01-12 17:38:56.030115683 +0000
+@@ -74,7 +74,7 @@
  /*
   * KAI          use "bye" command and rename "log" to "watchlog"
   */
@@ -22,7 +10,7 @@
  
  /*
   * TESLA	drops DTR on logout. Historical note:
-@@ -92,12 +92,12 @@
+@@ -86,12 +86,12 @@
  /*
   * DOTLAST      put "." last in the default path, for security reasons
   */
@@ -37,7 +25,7 @@
  
  /*
   * AUTOLOGOUT	tries to determine if it should set autologout depending
-@@ -136,7 +136,7 @@
+@@ -132,7 +132,7 @@
  /*
   * NEWGRP	Provide a newgrp builtin.
   */
@@ -46,9 +34,24 @@
  
  /*
   * SYSMALLOC	Use the system provided version of malloc and friends.
---- tcsh-6.08.01.orig/tcsh.man
-+++ tcsh-6.08.01/tcsh.man
-@@ -560,7 +560,7 @@
+diff -urNpa tcsh-6.20.00.orig/Makefile.in tcsh-6.20.00/Makefile.in
+--- tcsh-6.20.00.orig/Makefile.in	2015-08-24 20:09:04.000000000 +0000
++++ tcsh-6.20.00/Makefile.in	2018-01-12 17:38:56.030115683 +0000
+@@ -144,8 +144,8 @@ CFLAGS = @CFLAGS@
+ #DFLAGS=
+ #DFLAGS=-D_PATH_TCSHELL='"${DESTBIN}/tcsh"'
+ ## The following is set by autoconf.
+-DFLAGS = -D_PATH_TCSHELL='"${bindir}/tcsh"' @DFLAGS@ @CPPFLAGS@
+-
++#DFLAGS = -D_PATH_TCSHELL='"${bindir}/tcsh"' @DFLAGS@ @CPPFLAGS@
++DFLAGS = @DFLAGS@ @CPPFLAGS@
+ 
+ ################################################################
+ ## LDFLAGS.  Define something here if you need to
+diff -urNpa tcsh-6.20.00.orig/tcsh.man tcsh-6.20.00/tcsh.man
+--- tcsh-6.20.00.orig/tcsh.man	2016-11-24 15:04:52.000000000 +0000
++++ tcsh-6.20.00/tcsh.man	2018-01-12 17:38:56.031115683 +0000
+@@ -603,7 +603,7 @@ Repeating \fIdabbrev-expand\fR without a
  changes to the next previous word etc., skipping identical matches
  much like \fIhistory-search-backward\fR does.
  .TP 8
@@ -56,4 +59,4 @@
 +.B delete-char \fR(bound to `Del' if using the standard \fI/etc/csh.cshrc\fR)
  Deletes the character under the cursor.
  See also \fIdelete-char-or-list-or-eof\fR.
- .TP 8
+ Cursor behavior modified by \fBvimode\fR.

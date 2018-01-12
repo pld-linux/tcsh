@@ -16,12 +16,12 @@ Summary(ru.UTF-8):	Улучшеная версия csh
 Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
-Version:	6.18.01
-Release:	5
+Version:	6.20.00
+Release:	1
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
-# Source0-md5:	6eed09dbd4223ab5b6955378450d228a
+# Source0-md5:	59d40ef40a68e790d95e182069431834
 Source1:	csh.cshrc
 Source2:	csh.login
 Source3:	%{name}-skel-.login
@@ -124,7 +124,6 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 %patch6 -p1
 
 %build
-mkdir m4
 cp /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
@@ -151,7 +150,7 @@ install -d $RPM_BUILD_ROOT/etc/skel
 # fix lang code
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{gr,el}
 # it's Ukrainian in UTF-8, not Russian in KOI8-U
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{ru_UA.koi8u,uk}
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{ru_UA,uk}
 
 %if %{with static}
 install tcsh.static $RPM_BUILD_ROOT%{_bindir}
