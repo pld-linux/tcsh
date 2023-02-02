@@ -17,7 +17,7 @@ Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
 Version:	6.20.00
-Release:	2
+Release:	3
 License:	distributable
 Group:		Applications/Shells
 Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
@@ -32,6 +32,7 @@ Patch3:		%{name}-time.patch
 Patch4:		%{name}-rlimit_locks.patch
 Patch5:		%{name}-no_TERMCAP.patch
 Patch6:		%{name}-format-security.patch
+Patch7:         tcsh-6.21.00-fno-common.patch
 URL:		http://www.tcsh.org/Home
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -122,6 +123,7 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 %patch4	-p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 %build
 cp /usr/share/automake/config.sub .
