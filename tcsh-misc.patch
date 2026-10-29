@@ -1,7 +1,8 @@
-diff -urNpa tcsh-6.20.00.orig/config_f.h tcsh-6.20.00/config_f.h
---- tcsh-6.20.00.orig/config_f.h	2016-04-16 15:44:18.000000000 +0000
-+++ tcsh-6.20.00/config_f.h	2018-01-12 17:38:56.030115683 +0000
-@@ -74,7 +74,7 @@
+diff --git a/config_f.h b/config_f.h
+index 7c8a771..b0a8a3e 100644
+--- a/config_f.h
++++ b/config_f.h
+@@ -82,7 +82,7 @@
  /*
   * KAI          use "bye" command and rename "log" to "watchlog"
   */
@@ -10,7 +11,7 @@ diff -urNpa tcsh-6.20.00.orig/config_f.h tcsh-6.20.00/config_f.h
  
  /*
   * TESLA	drops DTR on logout. Historical note:
-@@ -86,12 +86,12 @@
+@@ -94,12 +94,12 @@
  /*
   * DOTLAST      put "." last in the default path, for security reasons
   */
@@ -25,7 +26,7 @@ diff -urNpa tcsh-6.20.00.orig/config_f.h tcsh-6.20.00/config_f.h
  
  /*
   * AUTOLOGOUT	tries to determine if it should set autologout depending
-@@ -132,7 +132,7 @@
+@@ -140,7 +140,7 @@
  /*
   * NEWGRP	Provide a newgrp builtin.
   */
@@ -34,29 +35,3 @@ diff -urNpa tcsh-6.20.00.orig/config_f.h tcsh-6.20.00/config_f.h
  
  /*
   * SYSMALLOC	Use the system provided version of malloc and friends.
-diff -urNpa tcsh-6.20.00.orig/Makefile.in tcsh-6.20.00/Makefile.in
---- tcsh-6.20.00.orig/Makefile.in	2015-08-24 20:09:04.000000000 +0000
-+++ tcsh-6.20.00/Makefile.in	2018-01-12 17:38:56.030115683 +0000
-@@ -144,8 +144,8 @@ CFLAGS = @CFLAGS@
- #DFLAGS=
- #DFLAGS=-D_PATH_TCSHELL='"${DESTBIN}/tcsh"'
- ## The following is set by autoconf.
--DFLAGS = -D_PATH_TCSHELL='"${bindir}/tcsh"' @DFLAGS@ @CPPFLAGS@
--
-+#DFLAGS = -D_PATH_TCSHELL='"${bindir}/tcsh"' @DFLAGS@ @CPPFLAGS@
-+DFLAGS = @DFLAGS@ @CPPFLAGS@
- 
- ################################################################
- ## LDFLAGS.  Define something here if you need to
-diff -urNpa tcsh-6.20.00.orig/tcsh.man tcsh-6.20.00/tcsh.man
---- tcsh-6.20.00.orig/tcsh.man	2016-11-24 15:04:52.000000000 +0000
-+++ tcsh-6.20.00/tcsh.man	2018-01-12 17:38:56.031115683 +0000
-@@ -603,7 +603,7 @@ Repeating \fIdabbrev-expand\fR without a
- changes to the next previous word etc., skipping identical matches
- much like \fIhistory-search-backward\fR does.
- .TP 8
--.B delete-char \fR(not bound)
-+.B delete-char \fR(bound to `Del' if using the standard \fI/etc/csh.cshrc\fR)
- Deletes the character under the cursor.
- See also \fIdelete-char-or-list-or-eof\fR.
- Cursor behavior modified by \fBvimode\fR.

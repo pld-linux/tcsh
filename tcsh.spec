@@ -16,32 +16,27 @@ Summary(ru.UTF-8):	Улучшеная версия csh
 Summary(tr.UTF-8):	Gelişmiş c-kabuğu (c-shell)
 Summary(uk.UTF-8):	Покращена верся csh
 Name:		tcsh
-Version:	6.20.00
-Release:	3
+Version:	6.24.16
+Release:	1
 License:	distributable
 Group:		Applications/Shells
-Source0:	ftp://ftp.astron.com/pub/tcsh/%{name}-%{version}.tar.gz
-# Source0-md5:	59d40ef40a68e790d95e182069431834
+Source0:	https://astron.com/pub/tcsh/%{name}-%{version}.tar.gz
+# Source0-md5:	448f53f12544abb627c9f078373b8ff5
 Source1:	csh.cshrc
 Source2:	csh.login
 Source3:	%{name}-skel-.login
 Patch0:		%{name}-misc.patch
-Patch1:		%{name}-termios.patch
 Patch2:		%{name}-no-timestamp-history.patch
-Patch3:		%{name}-time.patch
-Patch4:		%{name}-rlimit_locks.patch
 Patch5:		%{name}-no_TERMCAP.patch
-Patch6:		%{name}-format-security.patch
-Patch7:         tcsh-6.21.00-fno-common.patch
-URL:		http://www.tcsh.org/Home
-BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake
+URL:		https://www.tcsh.org/
 BuildRequires:	groff
 # for gencat
 BuildRequires:	iconv
+BuildRequires:	libxcrypt-devel
 BuildRequires:	ncurses-devel >= 5.0
 %if %{with static}
 BuildRequires:	glibc-static
+BuildRequires:	libxcrypt-static
 BuildRequires:	ncurses-static
 %endif
 Requires(post,preun):	grep
@@ -117,30 +112,18 @@ W tym pakiecie jest statycznie skonsolidowany tcsh.
 %prep
 %setup -q
 %patch -P0 -p1
-%patch -P1	-p1
-%{!?with_working_history:%patch2 -p1}
-%patch -P3	-p1
-%patch -P4	-p1
+%{!?with_working_history:%patch -P2 -p1}
 %patch -P5 -p1
-%patch -P6 -p1
-%patch -P7 -p1
 
 %build
-cp /usr/share/automake/config.sub .
-%{__aclocal}
-%{__autoconf}
 %configure
 %if %{with static}
 %{__make} \
-	LDFLAGS="-static %{rpmldflags}" \
-	LIBES="-lncurses -lcrypt"
+	LDFLAGS="-static %{rpmldflags}"
 mv -f tcsh tcsh.static
 %endif
 %{__make} \
-	LDFLAGS="%{rpmldflags}" \
-	LIBES="-lncurses -lcrypt"
-
-%{__make} -C nls
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -149,10 +132,10 @@ install -d $RPM_BUILD_ROOT/etc/skel
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# fix lang code
-%{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{gr,el}
 # it's Ukrainian in UTF-8, not Russian in KOI8-U
 %{__mv} $RPM_BUILD_ROOT%{_datadir}/locale/{ru_UA,uk}
+# untranslated strings
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/locale/C/LC_MESSAGES/tcsh.cat
 
 %if %{with static}
 install tcsh.static $RPM_BUILD_ROOT%{_bindir}
@@ -204,14 +187,13 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc NewThings FAQ eight-bit.txt complete.tcsh
+%doc FAQ Fixes README.md eight-bit.txt complete.tcsh
 
 %config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/csh.*
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/skel/.login
 
 %attr(755,root,root) %{_bindir}/csh
 %attr(755,root,root) %{_bindir}/tcsh
-#%{_datadir}/locale/C/LC_MESSAGES/tcsh.cat
 %lang(de) %{_datadir}/locale/de/LC_MESSAGES/tcsh.cat
 %lang(el) %{_datadir}/locale/el/LC_MESSAGES/tcsh.cat
 %lang(es) %{_datadir}/locale/es/LC_MESSAGES/tcsh.cat

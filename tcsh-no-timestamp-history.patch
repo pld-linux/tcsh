@@ -1,12 +1,13 @@
-diff -urNpa tcsh-6.20.00.orig/sh.hist.c tcsh-6.20.00/sh.hist.c
---- tcsh-6.20.00.orig/sh.hist.c	2015-06-06 21:19:08.000000000 +0000
-+++ tcsh-6.20.00/sh.hist.c	2018-01-12 17:41:58.363104815 +0000
-@@ -1227,7 +1227,7 @@ rechist(Char *fname, int ref)
-     struct varent *shist;
+diff --git a/sh.hist.c b/sh.hist.c
+index f945aee..f1b55e1 100644
+--- a/sh.hist.c
++++ b/sh.hist.c
+@@ -1245,7 +1245,7 @@ rechist(Char *xfname, int ref)
      char path[MAXPATHLEN];
      struct stat st;
+     static Char *fname;
 -    static Char   *dumphist[] = {STRhistory, STRmhT, 0, 0};
 +    static Char   *dumphist[] = {STRhistory, STRmh, 0, 0};
  
-     if (fname == NULL && !ref) 
+     if (xfname == NULL && !ref)
  	return;
